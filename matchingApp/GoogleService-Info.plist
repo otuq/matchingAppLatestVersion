@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>39312112303-jtbinr596jcjlaaaac2mek2brnknfi0l.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.39312112303-jtbinr596jcjlaaaac2mek2brnknfi0l</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBE1bIl5XJ63hvkg33RA1MXppWEFMKJ7BU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>39312112303</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.otuq.matchingApp</string>
+	<key>PROJECT_ID</key>
+	<string>matchingappotuq</string>
+	<key>STORAGE_BUCKET</key>
+	<string>matchingappotuq.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:39312112303:ios:55ebef7d3b28850ecab25a</string>
+	<key>DATABASE_URL</key>
+	<string>https://matchingappotuq.firebaseio.com</string>
+</dict>
+</plist>

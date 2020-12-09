@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ana-Xp-IIJ">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Modal Window View Controller-->
+        <scene sceneID="VbU-oa-2Yd">
+            <objects>
+                <viewController storyboardIdentifier="ModalWindowViewController" modalPresentationStyle="currentContext" id="ana-Xp-IIJ" customClass="ModalWindowViewController" customModule="matchingApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zww-sQ-dx3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="wjV-G6-UJQ">
+                                <rect key="frame" x="10" y="684" width="394" height="178"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="編集" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4x-gB-oAh">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="25"/>
+                                        <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="fFJ-3f-3gT"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dcv-wL-Yjh">
+                                        <rect key="frame" x="0.0" y="26" width="394" height="50"/>
+                                        <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="y3L-L1-Rgi"/>
+                                        </constraints>
+                                        <state key="normal" title="写真を選択"/>
+                                        <connections>
+                                            <action selector="photoEditButton:" destination="ana-Xp-IIJ" eventType="touchUpInside" id="cjq-TA-Jax"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AqT-YG-Cak">
+                                        <rect key="frame" x="0.0" y="77" width="394" height="50"/>
+                                        <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="WCu-nj-kpX"/>
+                                        </constraints>
+                                        <state key="normal" title="プロフィールを編集"/>
+                                        <connections>
+                                            <action selector="profileEditButton:" destination="ana-Xp-IIJ" eventType="touchUpInside" id="tmC-RL-Bjm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4UE-10-YDw">
+                                        <rect key="frame" x="0.0" y="128" width="394" height="50"/>
+                                        <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="v0r-nX-2aN"/>
+                                        </constraints>
+                                        <state key="normal" title="キャンセル"/>
+                                        <connections>
+                                            <action selector="cancelButton:" destination="ana-Xp-IIJ" eventType="touchUpInside" id="HHQ-Sd-DXJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="wjV-G6-UJQ" firstAttribute="leading" secondItem="yph-Zl-xRt" secondAttribute="leading" constant="10" id="FkH-6a-QWq"/>
+                            <constraint firstItem="yph-Zl-xRt" firstAttribute="trailing" secondItem="wjV-G6-UJQ" secondAttribute="trailing" constant="10" id="iIx-gp-aPK"/>
+                            <constraint firstItem="yph-Zl-xRt" firstAttribute="bottom" secondItem="wjV-G6-UJQ" secondAttribute="bottom" id="yZM-YL-xRs"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="yph-Zl-xRt"/>
+                    </view>
+                    <connections>
+                        <outlet property="profileStuckView" destination="wjV-G6-UJQ" id="PZj-AH-6zz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VNC-tO-pXH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="102.89855072463769" y="175.44642857142856"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,0 +1,6 @@
+framework module Pods_matchingApp {
+  umbrella header "Pods-matchingApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

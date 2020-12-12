@@ -14,6 +14,7 @@ class SearchViewController: UIViewController {
     private let cellId = "cellId"
     private let cellColums: CGFloat = 2
     private var anotherUsers = [User]()
+//    private var anotherUserListener:
     
     @IBOutlet weak var searchCollectionView: UICollectionView!
     
@@ -35,7 +36,7 @@ class SearchViewController: UIViewController {
     }
     
     func fetchUserInfo(){
-        
+        anotherUsers.removeAll()
         Firestore.firestore().collection("user").getDocuments { (snapshot, error) in
             if let err = error{
                 print("他ユーザーの情報の取得に失敗しました。",err)

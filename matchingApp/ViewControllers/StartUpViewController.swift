@@ -22,7 +22,11 @@ class StartUpViewController: UIViewController {
     @IBOutlet weak var userLocationTextField: UITextField!
     @IBOutlet weak var registerButton: UIButton!
     
-    private let age = [Int](18...100).map{String($0) + "歳"}
+    private let age = { () -> [String] in
+        var array = [Int](18...100).map{String($0) + "歳"}
+        array.insert("未設定", at: 0)
+        return array
+    }
     private let locations = ["未設定","北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"]
     
     private var genderValue: String?
@@ -32,6 +36,7 @@ class StartUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         settingView()
+        settingProperty()
         settingPickerView()
     }
     
@@ -65,12 +70,21 @@ class StartUpViewController: UIViewController {
     private func settingView(){
         userNameTextField.delegate = self
         userLocationTextField.delegate = self
-        genderValue = userGenderSegment.titleForSegment(at: 0)
-        userProfileImageView.layer.cornerRadius = userProfileImageView.bounds.width/2
         userProfileImageView.addTarget(self, action: #selector(tapActionPickerView), for: .touchUpInside)
         userGenderSegment.addTarget(self, action: #selector(segmentChange), for: UIControl.Event.valueChanged)
         registerButton.addTarget(self, action: #selector(tapActionRegister), for: .touchUpInside)
+    }
+    
+    private func settingProperty(){
+        genderValue = userGenderSegment.titleForSegment(at: 0)
+        userAgeTextField.text = "未設定"
+        userLocationTextField.text = "未設定"
+        userProfileImageView.layer.cornerRadius = userProfileImageView.bounds.width/2
+        registerButton.layer.cornerRadius = 10
+        registerButton.layer.borderWidth = 1
+        registerButton.layer.borderColor = UIColor.darkGray.cgColor
         registerButton.isEnabled = false
+        registerButton.layer.opacity = 0.5
     }
     
     @objc private func tapActionPickerView(){
@@ -138,7 +152,9 @@ class StartUpViewController: UIViewController {
                 }
                 print("データの保存に成功しました。")
                 //モーダルウィンドウでNavigationControllerを遡る時TabbarControllerをまずキャストして選択されたviewControllerをキャストする
-                let tab = self.presentingViewController as! UITabBarController
+                let tab = self.presentingViewController as! TabbarViewController
+                tab.selectAll(<#T##sender: Any?##Any?#>)
+                
                 let nav = tab.selectedViewController as! UINavigationController
                 let searchVC = nav.viewControllers[nav.viewControllers.count-1]as? SearchViewController
                 searchVC?.fetchUserInfo()
@@ -153,8 +169,10 @@ extension StartUpViewController: UITextFieldDelegate{
         let userName = userNameTextField.text?.isEmpty ?? false
         if userName{
             registerButton.isEnabled = false
+            registerButton.layer.opacity = 0.5
         }else{
             registerButton.isEnabled = true
+            registerButton.layer.opacity = 1
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -173,7 +191,7 @@ extension StartUpViewController: UIPickerViewDelegate,UIPickerViewDataSource{
         if let pickerTag = PickerTag.init(rawValue: pickerView.tag){
             switch pickerTag {
             case .age:
-                return age.count
+                return age().count
             case .locaton:
                 return locations.count
             }
@@ -185,7 +203,7 @@ extension StartUpViewController: UIPickerViewDelegate,UIPickerViewDataSource{
         if let picerTag = PickerTag.init(rawValue: pickerView.tag){
             switch picerTag {
             case .age:
-                return age[row]
+                return age()[row]
             case .locaton:
                 return locations[row]
             }
@@ -197,7 +215,7 @@ extension StartUpViewController: UIPickerViewDelegate,UIPickerViewDataSource{
         if let pickerTag = PickerTag.init(rawValue: pickerView.tag){
             switch pickerTag {
             case .age:
-                userAgeTextField.text = age[row]
+                userAgeTextField.text = age()[row]
             case .locaton:
                 userLocationTextField.text   = locations[row]
             }
@@ -218,6 +236,6 @@ extension StartUpViewController: UIImagePickerControllerDelegate,UINavigationCon
         }
         userProfileImageView.imageView?.contentMode = .scaleAspectFill
         userProfileImageView.clipsToBounds = true
-//        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }

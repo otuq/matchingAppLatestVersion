@@ -16,7 +16,8 @@ class TabbarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//
+
+        
 //        viewControllers?.enumerated().forEach({ (index,viewController) in
 //            if let name = ControllerName.init(rawValue: index){
 //                switch name {

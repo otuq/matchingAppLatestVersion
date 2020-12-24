@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChatInputAccessory" customModule="matchingApp" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="rgT-xY-48B">
+            <rect key="frame" x="0.0" y="0.0" width="703" height="372"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="おしり触らせて" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Bnk-9P-jpE">
+                    <rect key="frame" x="10" y="54" width="627" height="274"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BaA-P0-DBu">
+                    <rect key="frame" x="647" y="171" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="BaA-P0-DBu" firstAttribute="centerY" secondItem="rgT-xY-48B" secondAttribute="centerY" id="CTV-Zd-vw3"/>
+                <constraint firstItem="KN2-ob-Oee" firstAttribute="bottom" secondItem="Bnk-9P-jpE" secondAttribute="bottom" constant="10" id="IoE-0t-KRp"/>
+                <constraint firstItem="KN2-ob-Oee" firstAttribute="trailing" secondItem="BaA-P0-DBu" secondAttribute="trailing" constant="10" id="dap-c7-JrH"/>
+                <constraint firstItem="BaA-P0-DBu" firstAttribute="leading" secondItem="Bnk-9P-jpE" secondAttribute="trailing" constant="10" id="g2l-N7-cWD"/>
+                <constraint firstItem="Bnk-9P-jpE" firstAttribute="top" secondItem="KN2-ob-Oee" secondAttribute="top" constant="10" id="gk8-e5-BwL"/>
+                <constraint firstItem="Bnk-9P-jpE" firstAttribute="leading" secondItem="KN2-ob-Oee" secondAttribute="leading" constant="10" id="vl0-d8-145"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="KN2-ob-Oee"/>
+            <point key="canvasLocation" x="361.59420289855075" y="196.20535714285714"/>
+        </view>
+    </objects>
+</document>

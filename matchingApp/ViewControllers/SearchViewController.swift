@@ -9,6 +9,10 @@
 import UIKit
 import Firebase
 
+//protocol LogoutButton: class {
+//    func tapActionReload()
+//}
+
 class SearchViewController: UIViewController {
     
     private let cellId = "cellId"
@@ -21,7 +25,7 @@ class SearchViewController: UIViewController {
     @IBAction func logoutButton(_ sender: Any) {
         do{
             try Auth.auth().signOut()
-            self.whenNewUser()
+            self.whenNewUser(logoutBool: true)
         }catch{
             print(error)
         }
@@ -30,7 +34,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        whenNewUser()
+        whenNewUser(logoutBool: false)
         viewSetting()
         fetchUserInfo()
     }
@@ -40,6 +44,7 @@ class SearchViewController: UIViewController {
         Firestore.firestore().collection("user").getDocuments { (snapshot, error) in
             if let err = error{
                 print("他ユーザーの情報の取得に失敗しました。",err)
+                return
             }
             print("他ユーザーの情報の取得成功しました。")
                         
@@ -61,10 +66,11 @@ class SearchViewController: UIViewController {
         searchCollectionView.register(UINib(nibName: "SearchCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: cellId)
     }
     
-    private func whenNewUser(){
+    private func whenNewUser(logoutBool: Bool){
         if Auth.auth().currentUser?.uid == nil{
             let storyboard = UIStoryboard.init(name: "StartUp", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "StartUpViewController")
+            let viewController = storyboard.instantiateViewController(withIdentifier: "StartUpViewController")as! StartUpViewController
+            viewController.logoutBool = logoutBool
             let nav = UINavigationController.init(rootViewController: viewController)
             nav.modalPresentationStyle = .fullScreen
             nav.setNavigationBarHidden(true, animated: true)
@@ -81,13 +87,21 @@ extension SearchViewController: UICollectionViewDelegate,UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)as! SearchCollectionViewCell
+        anotherUsers.sort { (s1, s2) -> Bool in
+            let sortDate1 = s1.creatAt.dateValue()
+            let sortDate2 = s2.creatAt.dateValue()
+            return sortDate2 < sortDate1
+        }
         cell.anotherUser = anotherUsers[indexPath.row]
         return cell
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        <#code#>
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard.init(name: "ContactUser", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ContactUserViewController")as! ContactUserViewController
+        viewController.anotherUser = anotherUsers[indexPath.row]
+        navigationController?.pushViewController(viewController, animated: true)
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.view.frame.width/cellColums

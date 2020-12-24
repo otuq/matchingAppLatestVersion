@@ -15,6 +15,8 @@ class StartUpViewController: UIViewController {
         case age,locaton
     }
     
+    var logoutBool = false
+    
     @IBOutlet weak var userProfileImageView: UIButton!
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var userGenderSegment: UISegmentedControl!
@@ -129,7 +131,7 @@ class StartUpViewController: UIViewController {
             }
             print("登録に成功しました。")
             guard let user = authResult?.user else { return }
-//            let isAnonymous = user.isAnonymous  // true
+            //            let isAnonymous = user.isAnonymous  // true
             let uid = user.uid
             
             guard let userName = self.userNameTextField.text else { return }
@@ -143,7 +145,7 @@ class StartUpViewController: UIViewController {
                 "location": location,
                 "imageUrl": url,
                 "creatAt": Timestamp()
-                ]as [String: Any]
+            ]as [String: Any]
             
             Firestore.firestore().collection("user").document(uid).setData(data){ (error) in
                 if let err = error{
@@ -153,12 +155,27 @@ class StartUpViewController: UIViewController {
                 print("データの保存に成功しました。")
                 //モーダルウィンドウでNavigationControllerを遡る時TabbarControllerをまずキャストして選択されたviewControllerをキャストする
                 let tab = self.presentingViewController as! TabbarViewController
-                tab.selectAll(<#T##sender: Any?##Any?#>)
-                
-                let nav = tab.selectedViewController as! UINavigationController
-                let searchVC = nav.viewControllers[nav.viewControllers.count-1]as? SearchViewController
-                searchVC?.fetchUserInfo()
-                self.dismiss(animated: true, completion: nil)
+                print(self.logoutBool)
+                if self.logoutBool{
+                    tab.viewControllers?.forEach({ (viewController) in
+                        let nav = viewController as! UINavigationController
+                        let vc = nav.viewControllers[nav.viewControllers.count-1]
+                        if vc is SearchViewController{
+                            let searchVC = vc as! SearchViewController
+                            searchVC.fetchUserInfo()
+                            self.dismiss(animated: true, completion: nil)
+                        }else if vc is ProfileViewController{
+                            let profileVC = vc as! ProfileViewController
+                            profileVC.fetchUserInfo()
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    })
+                }else{
+                    let nav = tab.selectedViewController as! UINavigationController
+                    let searchVC = nav.viewControllers[nav.viewControllers.count-1]as? SearchViewController
+                    searchVC?.fetchUserInfo()
+                    self.dismiss(animated: true, completion: nil)
+                }
             }
         }
     }

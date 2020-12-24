@@ -44,11 +44,12 @@ class ProfileViewController: UIViewController {
         self.present(nav, animated: true, completion: nil)
     }
     
-    private func fetchUserInfo(){
+    func fetchUserInfo(){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection("user").document(uid).getDocument { (snapshot, error) in
             if let err = error{
                 print("user情報の取得に失敗しました。",err)
+                return
             }
             print("user情報の取得に成功しました。")
             guard let dic = snapshot?.data() else { return }
@@ -107,11 +108,13 @@ extension ProfileViewController: UIImagePickerControllerDelegate,UINavigationCon
         storageRef.putData(jpgData, metadata: nil) { (updateData, error) in
             if let err = error{
                 print("storageへのアップデートに失敗しました。",err)
+                return
             }
             print("storageへのアップデートに成功しました。")
             storageRef.downloadURL { (url, error) in
                 if let err = error{
                     print("ダウンロードurlの取得に失敗しました。",err)
+                    return
                 }
                 print("ダウンロードurlの取得に成功しました。")
                 guard let urlString = url?.absoluteString else { return }
@@ -126,6 +129,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate,UINavigationCon
         Firestore.firestore().collection("user").document(uid).updateData(updateData) { (error) in
             if let err = error{
                 print("Firestoreへのアップデートに失敗しました。",err)
+                return
             }
             print("Firestoreへのアップデートに成功しました。")
             

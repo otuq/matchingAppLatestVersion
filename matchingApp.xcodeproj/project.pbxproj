@@ -32,10 +32,23 @@
 		CE52FF782567B471002B9886 /* StartUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE52FF772567B471002B9886 /* StartUp.storyboard */; };
 		CE52FF7A2567C1DF002B9886 /* StartUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52FF792567C1DF002B9886 /* StartUpViewController.swift */; };
 		CE52FF7E2567C956002B9886 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE52FF7D2567C956002B9886 /* GoogleService-Info.plist */; };
+		CE638E20258A136D00F82A28 /* ChatMessage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE638E1F258A136D00F82A28 /* ChatMessage.storyboard */; };
+		CE638E25258A13B400F82A28 /* ChatMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE638E24258A13B400F82A28 /* ChatMessageViewController.swift */; };
+		CEA248F42588A78B00104F03 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA248F32588A78B00104F03 /* ChatRoom.swift */; };
+		CEA248F72588F9A800104F03 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA248F52588F9A800104F03 /* ChatTableViewCell.swift */; };
+		CEA248F82588F9A800104F03 /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA248F62588F9A800104F03 /* ChatTableViewCell.xib */; };
+		CEA248FA2588FBB300104F03 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA248F92588FBB300104F03 /* Message.swift */; };
+		CEA248FC2588FFD100104F03 /* ChatInputAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA248FB2588FFD100104F03 /* ChatInputAccessory.swift */; };
+		CEA248FE2588FFF000104F03 /* ChatInputAccessory.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA248FD2588FFF000104F03 /* ChatInputAccessory.xib */; };
 		CEAB5E45257DE04000ACBEB5 /* ModalWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEAB5E44257DE04000ACBEB5 /* ModalWindow.storyboard */; };
 		CEAB5E47257DF86C00ACBEB5 /* ModalWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAB5E46257DF86C00ACBEB5 /* ModalWindowViewController.swift */; };
+		CECE82092587668800DEE489 /* ContactUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECE82082587668800DEE489 /* ContactUserViewController.swift */; };
+		CED200792593422E00F9043A /* ChatList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED200782593422E00F9043A /* ChatList.storyboard */; };
+		CED20081259342B100F9043A /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED20080259342B100F9043A /* ChatListViewController.swift */; };
 		CED239B62574E42800D44546 /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED239B42574E42800D44546 /* SearchCollectionViewCell.swift */; };
 		CED239B72574E42800D44546 /* SearchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED239B52574E42800D44546 /* SearchCollectionViewCell.xib */; };
+		CEEAD6142593450600D08DDA /* ChatListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEAD6122593450600D08DDA /* ChatListTableViewCell.swift */; };
+		CEEAD6152593450600D08DDA /* ChatListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEAD6132593450600D08DDA /* ChatListTableViewCell.xib */; };
 		CEED084C257666A4007D932E /* ContactUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEED084B257666A4007D932E /* ContactUser.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -93,10 +106,23 @@
 		CE52FF772567B471002B9886 /* StartUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StartUp.storyboard; sourceTree = "<group>"; };
 		CE52FF792567C1DF002B9886 /* StartUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartUpViewController.swift; sourceTree = "<group>"; };
 		CE52FF7D2567C956002B9886 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CE638E1F258A136D00F82A28 /* ChatMessage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatMessage.storyboard; sourceTree = "<group>"; };
+		CE638E24258A13B400F82A28 /* ChatMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageViewController.swift; sourceTree = "<group>"; };
+		CEA248F32588A78B00104F03 /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
+		CEA248F52588F9A800104F03 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		CEA248F62588F9A800104F03 /* ChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
+		CEA248F92588FBB300104F03 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		CEA248FB2588FFD100104F03 /* ChatInputAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputAccessory.swift; sourceTree = "<group>"; };
+		CEA248FD2588FFF000104F03 /* ChatInputAccessory.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatInputAccessory.xib; sourceTree = "<group>"; };
 		CEAB5E44257DE04000ACBEB5 /* ModalWindow.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ModalWindow.storyboard; sourceTree = "<group>"; };
 		CEAB5E46257DF86C00ACBEB5 /* ModalWindowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalWindowViewController.swift; sourceTree = "<group>"; };
+		CECE82082587668800DEE489 /* ContactUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUserViewController.swift; sourceTree = "<group>"; };
+		CED200782593422E00F9043A /* ChatList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatList.storyboard; sourceTree = "<group>"; };
+		CED20080259342B100F9043A /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		CED239B42574E42800D44546 /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
 		CED239B52574E42800D44546 /* SearchCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCollectionViewCell.xib; sourceTree = "<group>"; };
+		CEEAD6122593450600D08DDA /* ChatListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListTableViewCell.swift; sourceTree = "<group>"; };
+		CEEAD6132593450600D08DDA /* ChatListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatListTableViewCell.xib; sourceTree = "<group>"; };
 		CEED084B257666A4007D932E /* ContactUser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactUser.storyboard; sourceTree = "<group>"; };
 		E15F3045D393917A93A9B3C5 /* Pods-matchingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-matchingApp.debug.xcconfig"; path = "Target Support Files/Pods-matchingApp/Pods-matchingApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -185,6 +211,7 @@
 				CE1CDC002564F4860043C659 /* storyboards */,
 				CE1CDC0F2565043B0043C659 /* ViewControllers */,
 				CED239B32574E3D600D44546 /* xib */,
+				CE638E1E258A131500F82A28 /* New Group */,
 				CE1CDBD92564F44C0043C659 /* Assets.xcassets */,
 				CE1CDBDB2564F44C0043C659 /* LaunchScreen.storyboard */,
 				CE52FF7D2567C956002B9886 /* GoogleService-Info.plist */,
@@ -217,8 +244,9 @@
 				CE52FF772567B471002B9886 /* StartUp.storyboard */,
 				CE1CDBD62564F4490043C659 /* Tabbar.storyboard */,
 				CE1CDC012564F5070043C659 /* Search.storyboard */,
-				CE1CDC032564F5320043C659 /* Chat.storyboard */,
 				CE1CDC052564F53F0043C659 /* Profile.storyboard */,
+				CED200782593422E00F9043A /* ChatList.storyboard */,
+				CE638E1F258A136D00F82A28 /* ChatMessage.storyboard */,
 				CEED084B257666A4007D932E /* ContactUser.storyboard */,
 				CE52FF752567B0A5002B9886 /* Configure.storyboard */,
 				CEAB5E44257DE04000ACBEB5 /* ModalWindow.storyboard */,
@@ -232,10 +260,12 @@
 				CE52FF792567C1DF002B9886 /* StartUpViewController.swift */,
 				CE1CDC0D2565042B0043C659 /* TabbarViewController.swift */,
 				CE1CDC07256503CE0043C659 /* SearchViewController.swift */,
-				CE1CDC09256503D50043C659 /* ChatViewController.swift */,
 				CE37441F2565874B002794DB /* ProfileViewController.swift */,
+				CED20080259342B100F9043A /* ChatListViewController.swift */,
+				CE638E24258A13B400F82A28 /* ChatMessageViewController.swift */,
 				CE52FF7325679783002B9886 /* ConfigureViewController.swift */,
 				CEAB5E46257DF86C00ACBEB5 /* ModalWindowViewController.swift */,
+				CECE82082587668800DEE489 /* ContactUserViewController.swift */,
 				CE1CDC0B256503DE0043C659 /* Unnecessary.swift */,
 			);
 			path = ViewControllers;
@@ -252,6 +282,8 @@
 			isa = PBXGroup;
 			children = (
 				CE0C1123256F6D9B007E6624 /* User.swift */,
+				CEA248F32588A78B00104F03 /* ChatRoom.swift */,
+				CEA248F92588FBB300104F03 /* Message.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -264,11 +296,27 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
+		CE638E1E258A131500F82A28 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				CE1CDC032564F5320043C659 /* Chat.storyboard */,
+				CE1CDC09256503D50043C659 /* ChatViewController.swift */,
+				CEA248F52588F9A800104F03 /* ChatTableViewCell.swift */,
+				CEA248F62588F9A800104F03 /* ChatTableViewCell.xib */,
+				CEA248FB2588FFD100104F03 /* ChatInputAccessory.swift */,
+				CEA248FD2588FFF000104F03 /* ChatInputAccessory.xib */,
+			);
+			name = "New Group";
+			path = xib;
+			sourceTree = "<group>";
+		};
 		CED239B32574E3D600D44546 /* xib */ = {
 			isa = PBXGroup;
 			children = (
 				CED239B42574E42800D44546 /* SearchCollectionViewCell.swift */,
 				CED239B52574E42800D44546 /* SearchCollectionViewCell.xib */,
+				CEEAD6122593450600D08DDA /* ChatListTableViewCell.swift */,
+				CEEAD6132593450600D08DDA /* ChatListTableViewCell.xib */,
 			);
 			path = xib;
 			sourceTree = "<group>";
@@ -341,7 +389,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = otuq;
 				TargetAttributes = {
 					CE1CDBCC2564F4490043C659 = {
@@ -382,10 +430,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE638E20258A136D00F82A28 /* ChatMessage.storyboard in Resources */,
 				CE1CDC062564F53F0043C659 /* Profile.storyboard in Resources */,
+				CEA248FE2588FFF000104F03 /* ChatInputAccessory.xib in Resources */,
+				CEEAD6152593450600D08DDA /* ChatListTableViewCell.xib in Resources */,
 				CE1CDBDD2564F44C0043C659 /* LaunchScreen.storyboard in Resources */,
 				CE52FF7E2567C956002B9886 /* GoogleService-Info.plist in Resources */,
 				CED239B72574E42800D44546 /* SearchCollectionViewCell.xib in Resources */,
+				CED200792593422E00F9043A /* ChatList.storyboard in Resources */,
 				CEED084C257666A4007D932E /* ContactUser.storyboard in Resources */,
 				CE52FF762567B0A5002B9886 /* Configure.storyboard in Resources */,
 				CEAB5E45257DE04000ACBEB5 /* ModalWindow.storyboard in Resources */,
@@ -394,6 +446,7 @@
 				CE1CDC042564F5320043C659 /* Chat.storyboard in Resources */,
 				CE1CDC022564F5070043C659 /* Search.storyboard in Resources */,
 				CE1CDBD82564F4490043C659 /* Tabbar.storyboard in Resources */,
+				CEA248F82588F9A800104F03 /* ChatTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,14 +577,22 @@
 				CE52FF7A2567C1DF002B9886 /* StartUpViewController.swift in Sources */,
 				CEAB5E47257DF86C00ACBEB5 /* ModalWindowViewController.swift in Sources */,
 				CE1CDC08256503CE0043C659 /* SearchViewController.swift in Sources */,
+				CEA248FA2588FBB300104F03 /* Message.swift in Sources */,
+				CEA248F42588A78B00104F03 /* ChatRoom.swift in Sources */,
 				CE1CDBD12564F4490043C659 /* AppDelegate.swift in Sources */,
+				CEA248F72588F9A800104F03 /* ChatTableViewCell.swift in Sources */,
+				CECE82092587668800DEE489 /* ContactUserViewController.swift in Sources */,
 				CE1CDC0E2565042B0043C659 /* TabbarViewController.swift in Sources */,
+				CEEAD6142593450600D08DDA /* ChatListTableViewCell.swift in Sources */,
 				CE1CDC0C256503DE0043C659 /* Unnecessary.swift in Sources */,
 				CE37441C2565717D002794DB /* Enum.swift in Sources */,
 				CE52FF7425679783002B9886 /* ConfigureViewController.swift in Sources */,
 				CE1CDC0A256503D50043C659 /* ChatViewController.swift in Sources */,
+				CEA248FC2588FFD100104F03 /* ChatInputAccessory.swift in Sources */,
+				CED20081259342B100F9043A /* ChatListViewController.swift in Sources */,
 				CE3744202565874B002794DB /* ProfileViewController.swift in Sources */,
 				CED239B62574E42800D44546 /* SearchCollectionViewCell.swift in Sources */,
+				CE638E25258A13B400F82A28 /* ChatMessageViewController.swift in Sources */,
 				CE1CDBD32564F4490043C659 /* SceneDelegate.swift in Sources */,
 				CE0C1124256F6D9B007E6624 /* User.swift in Sources */,
 			);
@@ -614,6 +675,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -674,6 +736,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

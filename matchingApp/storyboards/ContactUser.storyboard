@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--my page-->
+        <!--Contact User View Controller-->
         <scene sceneID="J9h-Yz-DCs">
             <objects>
-                <viewController storyboardIdentifier="ProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="h5m-Op-SLX" customClass="ProfileViewController" customModule="matchingApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContactUserViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="h5m-Op-SLX" customClass="ContactUserViewController" customModule="matchingApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r7C-Lc-w45">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,17 +22,17 @@
                                     <constraint firstAttribute="width" constant="80" id="VC0-G5-lwy"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="SN8-Fh-ITf">
-                                <rect key="frame" x="120" y="138" width="153" height="80"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SN8-Fh-ITf">
+                                <rect key="frame" x="120" y="138" width="274" height="70"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2N-43-7sI">
-                                        <rect key="frame" x="0.0" y="0.0" width="153" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2N-43-7sI">
+                                        <rect key="frame" x="0.0" y="0.0" width="274" height="30"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="gender/age/location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8d-WS-tTG">
-                                        <rect key="frame" x="0.0" y="50" width="153" height="30"/>
+                                        <rect key="frame" x="0.0" y="40" width="274" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -125,6 +125,7 @@
                             <constraint firstItem="b8G-ky-KuS" firstAttribute="trailing" secondItem="B7x-AN-xXc" secondAttribute="trailing" constant="20" id="hhQ-4h-fp9"/>
                             <constraint firstItem="cZG-Uh-lUP" firstAttribute="top" secondItem="b8G-ky-KuS" secondAttribute="top" constant="50" id="hp4-QG-k2M"/>
                             <constraint firstItem="SN8-Fh-ITf" firstAttribute="top" secondItem="cZG-Uh-lUP" secondAttribute="top" id="iA2-sj-DMr"/>
+                            <constraint firstItem="b8G-ky-KuS" firstAttribute="trailing" secondItem="SN8-Fh-ITf" secondAttribute="trailing" constant="20" id="nEW-uN-8dZ"/>
                             <constraint firstItem="SN8-Fh-ITf" firstAttribute="leading" secondItem="cZG-Uh-lUP" secondAttribute="trailing" constant="20" id="ntV-tQ-Avk"/>
                             <constraint firstItem="nFk-ar-QMQ" firstAttribute="leading" secondItem="b8G-ky-KuS" secondAttribute="leading" constant="20" id="plY-S8-Jqm"/>
                             <constraint firstItem="cZG-Uh-lUP" firstAttribute="leading" secondItem="b8G-ky-KuS" secondAttribute="leading" constant="20" id="tfT-vO-AoY"/>
@@ -132,12 +133,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b8G-ky-KuS"/>
                     </view>
-                    <navigationItem key="navigationItem" title="my page" id="hre-8B-teS"/>
+                    <navigationItem key="navigationItem" id="hre-8B-teS"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="userImageView" destination="cZG-Uh-lUP" id="iYX-8w-Fdv"/>
-                        <outlet property="userInfoLabel" destination="R8d-WS-tTG" id="fOS-xe-KYV"/>
-                        <outlet property="userNameLabel" destination="r2N-43-7sI" id="dZr-vs-cZ2"/>
+                        <outlet property="favoriteButton" destination="ctZ-mb-iqM" id="DbO-El-Ecc"/>
+                        <outlet property="messageButton" destination="cHb-VL-Y8D" id="IbQ-lh-FYa"/>
+                        <outlet property="userImageView" destination="cZG-Uh-lUP" id="NoQ-Z0-3pj"/>
+                        <outlet property="userInfoLabel" destination="R8d-WS-tTG" id="R9I-7V-vRP"/>
+                        <outlet property="usernameLabel" destination="r2N-43-7sI" id="wCW-pi-6zk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="coI-xh-pcc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

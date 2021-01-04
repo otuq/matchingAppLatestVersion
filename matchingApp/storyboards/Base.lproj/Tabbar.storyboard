@@ -42,7 +42,7 @@
         <!--ChatList-->
         <scene sceneID="aTJ-zI-TfH">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="ChatMessageViewController" storyboardName="ChatList" id="pYf-d1-cYj" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="ChatListViewController" storyboardName="ChatList" id="pYf-d1-cYj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="chat" image="message" catalog="system" id="XUz-5R-6Cf"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o1T-Fo-euZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

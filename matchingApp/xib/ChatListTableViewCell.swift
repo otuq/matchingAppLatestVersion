@@ -7,14 +7,38 @@
 //
 
 import UIKit
+import Nuke
 
 class ChatListTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var chatListImageView: UIImageView!
+    @IBOutlet weak var chatListNameLabel: UILabel!
+    @IBOutlet weak var chatListLatestMessageLabel: UILabel!
+    @IBOutlet weak var chatListDateLabel: UILabel!
+    
+    var chatRoom: ChatRoom?{
+        didSet{
+            if let urlString = URL(string: chatRoom?.anotherUser?.imageUrl ?? ""){
+                Nuke.loadImage(with: urlString, into: chatListImageView)
+            }
+            chatListNameLabel.text = chatRoom?.anotherUser?.name ?? "no name"
+            chatListLatestMessageLabel.text = chatRoom?.message ?? "no message"
+            chatListDateLabel.text = dateFormatter(date: chatRoom?.creatAt.dateValue() ?? Date())
+        }
+    }
 
-    var chatRoom: ChatRoom?
+    private func dateFormatter(date: Date)->String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        dateFormatter.locale = Locale(identifier: "ja_JP")
+        return dateFormatter.string(from: date)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        chatListImageView.layer.cornerRadius = chatListImageView.bounds.width/2
+        chatListImageView.contentMode = .scaleAspectFill
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

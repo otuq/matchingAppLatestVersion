@@ -10,15 +10,62 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellId" rowHeight="265" id="KGk-i7-Jjw" customClass="ChatListTableViewCell" customModule="matchingApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="367" height="265"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellId" rowHeight="147" id="KGk-i7-Jjw" customClass="ChatListTableViewCell" customModule="matchingApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="382" height="147"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="367" height="265"/>
+                <rect key="frame" x="0.0" y="0.0" width="382" height="147"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L3K-wF-r0J">
+                        <rect key="frame" x="10" y="48.5" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="Lqe-Un-ftl"/>
+                            <constraint firstAttribute="width" secondItem="L3K-wF-r0J" secondAttribute="height" multiplier="1:1" id="yt5-a0-eKT"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PDy-bD-MU2">
+                        <rect key="frame" x="80" y="47.5" width="110.5" height="51"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjh-lc-PUQ">
+                                <rect key="frame" x="0.0" y="0.0" width="110.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="latestMessage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LCf-M1-dEN">
+                                <rect key="frame" x="0.0" y="30.5" width="110.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhg-Bc-4Nk">
+                        <rect key="frame" x="200.5" y="78" width="171.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="L3K-wF-r0J" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CyF-Bh-qj3"/>
+                    <constraint firstAttribute="trailing" secondItem="fhg-Bc-4Nk" secondAttribute="trailing" constant="10" id="HU4-w2-8pe"/>
+                    <constraint firstItem="L3K-wF-r0J" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="KF1-1I-mEO"/>
+                    <constraint firstItem="PDy-bD-MU2" firstAttribute="bottom" secondItem="fhg-Bc-4Nk" secondAttribute="bottom" id="W1f-Dv-dEA"/>
+                    <constraint firstItem="L3K-wF-r0J" firstAttribute="bottom" secondItem="PDy-bD-MU2" secondAttribute="bottom" id="Xnp-o9-TMV"/>
+                    <constraint firstItem="PDy-bD-MU2" firstAttribute="leading" secondItem="L3K-wF-r0J" secondAttribute="trailing" constant="20" id="qug-Tv-ga3"/>
+                    <constraint firstItem="fhg-Bc-4Nk" firstAttribute="leading" secondItem="PDy-bD-MU2" secondAttribute="trailing" constant="10" id="xw3-7k-MdA"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="60" y="99"/>
+            <connections>
+                <outlet property="chatListDateLabel" destination="fhg-Bc-4Nk" id="DKI-wU-tlj"/>
+                <outlet property="chatListImageView" destination="L3K-wF-r0J" id="acS-6Z-zDZ"/>
+                <outlet property="chatListLatestMessageLabel" destination="LCf-M1-dEN" id="9ph-w8-TTT"/>
+                <outlet property="chatListNameLabel" destination="qjh-lc-PUQ" id="MgN-Zy-YTK"/>
+            </connections>
+            <point key="canvasLocation" x="69.565217391304358" y="161.04910714285714"/>
         </tableViewCell>
     </objects>
 </document>

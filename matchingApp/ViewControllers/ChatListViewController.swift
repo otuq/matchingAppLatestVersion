@@ -25,14 +25,16 @@ class ChatListViewController: UIViewController {
     private func settingView(){
         chatListTableView.delegate = self
         chatListTableView.dataSource = self
+        chatListTableView.register(UINib(nibName: "ChatListTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
     }
     private func fetchChatRoom(){
         
-        Firestore.firestore().collection("chatRoom").addSnapshotListener { (snapshot, error) in
+        Firestore.firestore().collection("chatRooms").addSnapshotListener { (snapshot, error) in
             if let err = error{
                 print("chatRoomの情報の取得に失敗しました。",err)
                 return
             }
+            print("chatRoomの情報の取得に成功しました。ok")
             snapshot?.documentChanges.forEach({ (documentChange) in
                 switch documentChange.type{
                 case .added:
@@ -56,11 +58,13 @@ class ChatListViewController: UIViewController {
                     if let err = error {
                         print("パートナーUserの情報の取得に失敗しました。",err)
                     }
+                    print("パートナーUserの情報の取得に成功しました。")
                     guard let data = snapshot?.data() else { return }
                     let anotherUser = User.init(dic: data)
                     anotherUser.anotherUid = snapshot?.documentID
                     chatRoom.anotherUser = anotherUser
-                    
+                    self.chatRooms.append(chatRoom)
+                    self.chatListTableView.reloadData()
                 }
             }
         }
@@ -79,8 +83,10 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard.init(name: "ChatMessage", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "ChatMessageViewController")as! ChatMessageViewController
-        
-        self.present(viewController, animated: true, completion: nil)
+        viewController.chatRoom = chatRooms[indexPath.row]
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
 }

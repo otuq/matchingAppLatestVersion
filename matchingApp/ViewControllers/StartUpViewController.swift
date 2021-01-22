@@ -7,7 +7,9 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseFirestore
+import FirebaseStorage
+import FirebaseAuth
 
 class StartUpViewController: UIViewController {
     //tag番号

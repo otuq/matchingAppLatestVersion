@@ -22,8 +22,8 @@ class ChatListTableViewCell: UITableViewCell {
                 Nuke.loadImage(with: urlString, into: chatListImageView)
             }
             chatListNameLabel.text = chatRoom?.anotherUser?.name ?? "no name"
-            chatListLatestMessageLabel.text = chatRoom?.message ?? "no message"
-            chatListDateLabel.text = dateFormatter(date: chatRoom?.creatAt.dateValue() ?? Date())
+            chatListLatestMessageLabel.text = chatRoom?.latestMessage?.message ?? "no message"
+            chatListDateLabel.text = dateFormatter(date: chatRoom?.latestMessage?.creatAt.dateValue() ?? Date())
         }
     }
 

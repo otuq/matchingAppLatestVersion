@@ -7,19 +7,20 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseFirestore
 
 class ChatRoom {
     let members: [String]
-    let message: String
+    let latestMessageId: String
     let creatAt: Timestamp
     
     var documentId: String?
     var anotherUser: User?
+    var latestMessage: Message?
     
     init(dic: [String: Any]) {
         members = dic["members"]as? [String] ?? []
-        message = dic["message"]as? String ?? ""
+        latestMessageId = dic["latestMessageId"]as? String ?? ""
         creatAt = dic["creatAt"]as? Timestamp ?? Timestamp()
     }
 }

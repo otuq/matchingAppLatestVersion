@@ -9,11 +9,12 @@
 import UIKit
 import MessageKit
 import InputBarAccessoryView
-import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 import Nuke
 
 class ChatMessageViewController: MessagesViewController {
-
+    
     private var user: User?
     var chatRoom: ChatRoom?
     var messages = [Message]()
@@ -23,6 +24,7 @@ class ChatMessageViewController: MessagesViewController {
         messageKitSetting()
         fetchUserInfo()
     }
+    
     private func messageKitSetting(){
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messageCellDelegate = self
@@ -46,7 +48,7 @@ class ChatMessageViewController: MessagesViewController {
         
     }
 }
-
+//MARK: -MessagesDataSource
 extension ChatMessageViewController: MessagesDataSource{
     //自身の情報を設定する
     func currentSender() -> SenderType {
@@ -68,12 +70,14 @@ extension ChatMessageViewController: MessagesDataSource{
         return NSAttributedString(string: name, attributes: [.font: UIFont.preferredFont(forTextStyle: .caption1),.foregroundColor: UIColor(white: 0.3, alpha: 1.0)])
     }
 }
+//MARK: -MessageCellDelegate
 extension ChatMessageViewController: MessageCellDelegate{
     //メッセージをタップした時の処理
     func didTapMessage(in cell: MessageCollectionViewCell) {
         print("tapMessage")
     }
 }
+//MARK: -MessagesDisplayDelegate
 extension ChatMessageViewController: MessagesDisplayDelegate{
     //メッサージの色を変更
     func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
@@ -90,7 +94,7 @@ extension ChatMessageViewController: MessagesDisplayDelegate{
     }
     //アイコンのセット
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-
+        
         guard let url = URL(string: user?.imageUrl ?? "") else { return }
         guard let imageData = try? Data(contentsOf: url) else { return }
         let image = UIImage(data: imageData)
@@ -98,6 +102,7 @@ extension ChatMessageViewController: MessagesDisplayDelegate{
         avatarView.set(avatar: avatar)
     }
 }
+//MARK: -MessagesLayoutDelegate
 extension ChatMessageViewController: MessagesLayoutDelegate{
     func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return 18
@@ -109,7 +114,9 @@ extension ChatMessageViewController: MessagesLayoutDelegate{
         return 16
     }
 }
+//MARK: -InputBarAccessoryViewDelegate
 extension ChatMessageViewController: InputBarAccessoryViewDelegate{
+
     //送信ボタンを押した時の処理
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         sendMessageFirestore(text: text)
@@ -117,6 +124,50 @@ extension ChatMessageViewController: InputBarAccessoryViewDelegate{
         messagesCollectionView.scrollToBottom()
     }
     private func sendMessageFirestore(text: String){
+                
+        guard let userName = user?.name else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let chatRoomId = chatRoom?.documentId else { return }
         
+        let messageId = randomString(length: 20)
+        
+        let messageData = [
+            "name": userName,
+            "message": text,
+            "uid": uid,
+            "creatAt": Timestamp()
+        ]as [String: Any]
+        
+        Firestore.firestore().collection("chatRooms").document(chatRoomId).collection("messages").document(messageId).setData(messageData) { (error) in
+            if let err = error{
+                print("メッサージ情報の保存に失敗しました。",err)
+                return
+            }
+            
+            let latestMessageData = [
+                "latestMessageId": messageId
+            ]as [String: Any]
+            Firestore.firestore().collection("chatRooms").document(chatRoomId).updateData(latestMessageData) { (error) in
+                if let err = error{
+                    print("最新メッサージ情報のアップデートに失敗しました。",err)
+                    return
+                }
+                print("最新メッセージ情報の保存に成功しました。")
+                //Notification.Nameを拡張して通知名を追加する。下記のコードで通知を投稿する。リロードするChatListViewControllerにaddObserverを追加する。
+                NotificationCenter.default.post(name: .reload, object: nil)
+            }
+        }
     }
 }
+private func randomString(length: Int)->String{
+    let letters: NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789"
+    let length = UInt32(letters.length)
+    var randomString = ""
+    for _ in 0..<length{
+        let rand = arc4random_uniform(length)
+        var char = letters.character(at: Int(rand))
+        randomString += NSString(characters: &char, length: 1) as String
+    }
+    return randomString
+}
+

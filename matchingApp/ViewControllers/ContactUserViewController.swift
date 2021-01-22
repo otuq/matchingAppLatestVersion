@@ -7,13 +7,14 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 import Nuke
 
 class ContactUserViewController: UIViewController {
     
     var anotherUser: User?
-    var anotherMember: [String]?
+    var anotherMember = [String]()
     
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -48,22 +49,30 @@ class ContactUserViewController: UIViewController {
                 print("chatRooms情報の取得に失敗しました。",err)
                 return
             }
-            documents?.documents.forEach({ (snapshot) in
-                let data = snapshot.data()
-                let chatRoom = ChatRoom(dic: data)
-                if Set(members).isSubset(of: Set(chatRoom.members)){
+            print("chatRooms情報の取得に成功しました。")
+            for snapshot in documents?.documents ?? []{
+                let snapshotData = snapshot.data()
+                let chatRoom = ChatRoom(dic: snapshotData)
+                print(chatRoom.members,"firebase")
+                print(members,"current")
+                if Set(members) == Set(chatRoom.members){
+                    print("メンバーが一致しました。")
                     let storyboard = UIStoryboard.init(name: "ChatMessage", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "ChatMessageViewController")as! ChatMessageViewController
+                    chatRoom.documentId = snapshot.documentID
+                    chatRoom.anotherUser = self.anotherUser
                     viewController.chatRoom = chatRoom
                     self.anotherMember = chatRoom.members
                     self.navigationController?.pushViewController(viewController, animated: true)
+                    break
                 }
-            })
-        }
-        if !Set(members).isSubset(of: anotherMember ?? [String]()){
-            newChat(uuid: uuid, data: data)
+            }
+            if Set(members) != Set(self.anotherMember){
+                self.newChat(uuid: uuid, data: data)
+            }
         }
     }
+    
     private func newChat(uuid: String,data: [String: Any]){
         Firestore.firestore().collection("chatRooms").document(uuid).setData(data) { (error) in
             if let err = error{
@@ -82,6 +91,7 @@ class ContactUserViewController: UIViewController {
                 let viewController = storyboard.instantiateViewController(withIdentifier: "ChatMessageViewController")as! ChatMessageViewController
                 let chatRoom = ChatRoom(dic: data)
                 chatRoom.documentId = uuid
+                chatRoom.anotherUser = self.anotherUser
                 viewController.chatRoom = chatRoom
                 self.navigationController?.pushViewController(viewController, animated: true)
             }

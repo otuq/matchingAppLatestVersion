@@ -11,6 +11,7 @@
 		8617C51EDBCF32FEEC302487 /* Pods_matchingApp_matchingAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 014BD5CD51D535F6DCD65058 /* Pods_matchingApp_matchingAppUITests.framework */; };
 		CB46EBDB59328F16C91D2A02 /* Pods_matchingAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 485F6FC7807FF16371E7951F /* Pods_matchingAppTests.framework */; };
 		CE0C1124256F6D9B007E6624 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C1123256F6D9B007E6624 /* User.swift */; };
+		CE19DB9125BACA8F005FA8D8 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE19DB9025BACA8F005FA8D8 /* Extension.swift */; };
 		CE1CDBD12564F4490043C659 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CDBD02564F4490043C659 /* AppDelegate.swift */; };
 		CE1CDBD32564F4490043C659 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CDBD22564F4490043C659 /* SceneDelegate.swift */; };
 		CE1CDBD82564F4490043C659 /* Tabbar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE1CDBD62564F4490043C659 /* Tabbar.storyboard */; };
@@ -79,6 +80,7 @@
 		9D776A0B0DC67E66EF15F54E /* Pods-matchingApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-matchingApp.release.xcconfig"; path = "Target Support Files/Pods-matchingApp/Pods-matchingApp.release.xcconfig"; sourceTree = "<group>"; };
 		BBBA31D03A886F97C66B3478 /* Pods-matchingApp-matchingAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-matchingApp-matchingAppUITests.release.xcconfig"; path = "Target Support Files/Pods-matchingApp-matchingAppUITests/Pods-matchingApp-matchingAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CE0C1123256F6D9B007E6624 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CE19DB9025BACA8F005FA8D8 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		CE1CDBCD2564F4490043C659 /* matchingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = matchingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1CDBD02564F4490043C659 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE1CDBD22564F4490043C659 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 		CE37441825652D34002794DB /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				CE19DB9025BACA8F005FA8D8 /* Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				CE52FF7425679783002B9886 /* ConfigureViewController.swift in Sources */,
 				CE1CDC0A256503D50043C659 /* ChatViewController.swift in Sources */,
 				CEA248FC2588FFD100104F03 /* ChatInputAccessory.swift in Sources */,
+				CE19DB9125BACA8F005FA8D8 /* Extension.swift in Sources */,
 				CED20081259342B100F9043A /* ChatListViewController.swift in Sources */,
 				CE3744202565874B002794DB /* ProfileViewController.swift in Sources */,
 				CED239B62574E42800D44546 /* SearchCollectionViewCell.swift in Sources */,

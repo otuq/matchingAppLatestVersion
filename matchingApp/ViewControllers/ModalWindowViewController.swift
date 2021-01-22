@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseFirestore
 
 protocol PhotoEditDelegate: class {
     func tapActionPhotoEdit(edit: String)

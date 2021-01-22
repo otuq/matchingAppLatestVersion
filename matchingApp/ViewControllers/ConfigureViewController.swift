@@ -8,7 +8,8 @@
 
 import UIKit
 import Eureka
-import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 
 class ConfigureViewController: FormViewController {
     

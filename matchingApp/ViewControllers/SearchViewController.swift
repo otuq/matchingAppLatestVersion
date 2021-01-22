@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 
 //protocol LogoutButton: class {
 //    func tapActionReload()

@@ -7,12 +7,14 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseFirestore
+import FirebaseAuth
 
 class ChatListViewController: UIViewController {
 
     let cellId = "cellId"
     var chatRooms = [ChatRoom]()
+    private var chatRoomListner: ListenerRegistration?
     
     @IBOutlet weak var chatListTableView: UITableView!
     
@@ -21,15 +23,24 @@ class ChatListViewController: UIViewController {
         
         settingView()
         fetchChatRoom()
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: .reload, object: nil)
     }
+    @objc func reloadTableData(){
+        fetchChatRoom()
+    }
+    
     private func settingView(){
         chatListTableView.delegate = self
         chatListTableView.dataSource = self
         chatListTableView.register(UINib(nibName: "ChatListTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
     }
-    private func fetchChatRoom(){
+    func fetchChatRoom(){
+        //chatRoomsListnerは最終的にはいらなくなると思う。Logoutをしない仕様のアプリだから
+        chatRoomListner?.remove()
+        chatRooms.removeAll()
+        chatListTableView.reloadData()
         
-        Firestore.firestore().collection("chatRooms").addSnapshotListener { (snapshot, error) in
+       chatRoomListner = Firestore.firestore().collection("chatRooms").addSnapshotListener { (snapshot, error) in
             if let err = error{
                 print("chatRoomの情報の取得に失敗しました。",err)
                 return
@@ -59,24 +70,50 @@ class ChatListViewController: UIViewController {
                         print("パートナーUserの情報の取得に失敗しました。",err)
                     }
                     print("パートナーUserの情報の取得に成功しました。")
+                    
                     guard let data = snapshot?.data() else { return }
                     let anotherUser = User.init(dic: data)
                     anotherUser.anotherUid = snapshot?.documentID
                     chatRoom.anotherUser = anotherUser
-                    self.chatRooms.append(chatRoom)
-                    self.chatListTableView.reloadData()
+                        
+                    guard let chatRoomId = chatRoom.documentId else { return }
+                    let latestMessageId = chatRoom.latestMessageId
+                    
+                    if latestMessageId.isEmpty{
+                        self.chatRooms.append(chatRoom)
+                        self.chatListTableView.reloadData()
+                        return
+                    }
+
+                    Firestore.firestore().collection("chatRooms").document(chatRoomId).collection("messages").document(latestMessageId).getDocument { (snapshot, error) in
+                        if let err = error{
+                            print("最新メッセージの取得に失敗しました。",err)
+                        }
+                        print("最新メッセージの取得に成功しました。")
+                        
+                        guard let data = snapshot?.data() else { return }
+                        let messageData = Message.init(dic: data)
+                        chatRoom.latestMessage = messageData
+                        self.chatRooms.append(chatRoom)
+                        self.chatListTableView.reloadData()
+                    }
                 }
             }
         }
     }
-    
 }
+//MARK: -UITableViewDelegate, UITableViewDataSource
 extension ChatListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         chatRooms.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = chatListTableView.dequeueReusableCell(withIdentifier: cellId)as! ChatListTableViewCell
+        chatRooms.sort { (s1, s2) -> Bool in
+            let sort1 = s1.creatAt.dateValue()
+            let sort2 = s2.creatAt.dateValue()
+            return sort1 < sort2
+        }
         cell.chatRoom = chatRooms[indexPath.row]
         return cell
     }

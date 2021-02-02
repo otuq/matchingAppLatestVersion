@@ -93,6 +93,7 @@ class ChatListViewController: UIViewController {
                         
                         guard let data = snapshot?.data() else { return }
                         let messageData = Message.init(dic: data)
+                        
                         chatRoom.latestMessage = messageData
                         self.chatRooms.append(chatRoom)
                         self.chatListTableView.reloadData()
@@ -109,10 +110,10 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = chatListTableView.dequeueReusableCell(withIdentifier: cellId)as! ChatListTableViewCell
-        chatRooms.sort { (s1, s2) -> Bool in
+        self.chatRooms.sort { (s1, s2) -> Bool in
             let sort1 = s1.creatAt.dateValue()
             let sort2 = s2.creatAt.dateValue()
-            return sort1 < sort2
+            return sort1 > sort2
         }
         cell.chatRoom = chatRooms[indexPath.row]
         return cell

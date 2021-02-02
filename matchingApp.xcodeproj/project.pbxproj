@@ -26,6 +26,7 @@
 		CE1CDC0A256503D50043C659 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CDC09256503D50043C659 /* ChatViewController.swift */; };
 		CE1CDC0C256503DE0043C659 /* Unnecessary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CDC0B256503DE0043C659 /* Unnecessary.swift */; };
 		CE1CDC0E2565042B0043C659 /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1CDC0D2565042B0043C659 /* TabbarViewController.swift */; };
+		CE2CF27525C07D7E00050769 /* MockMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2CF27425C07D7E00050769 /* MockMessage.swift */; };
 		CE37441C2565717D002794DB /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37441B2565717D002794DB /* Enum.swift */; };
 		CE3744202565874B002794DB /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37441F2565874B002794DB /* ProfileViewController.swift */; };
 		CE52FF7425679783002B9886 /* ConfigureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE52FF7325679783002B9886 /* ConfigureViewController.swift */; };
@@ -101,6 +102,7 @@
 		CE1CDC09256503D50043C659 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		CE1CDC0B256503DE0043C659 /* Unnecessary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unnecessary.swift; sourceTree = "<group>"; };
 		CE1CDC0D2565042B0043C659 /* TabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
+		CE2CF27425C07D7E00050769 /* MockMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMessage.swift; sourceTree = "<group>"; };
 		CE37441B2565717D002794DB /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		CE37441F2565874B002794DB /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE52FF7325679783002B9886 /* ConfigureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureViewController.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				CE0C1123256F6D9B007E6624 /* User.swift */,
 				CEA248F32588A78B00104F03 /* ChatRoom.swift */,
 				CEA248F92588FBB300104F03 /* Message.swift */,
+				CE2CF27425C07D7E00050769 /* MockMessage.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 			files = (
 				CE52FF7A2567C1DF002B9886 /* StartUpViewController.swift in Sources */,
 				CEAB5E47257DF86C00ACBEB5 /* ModalWindowViewController.swift in Sources */,
+				CE2CF27525C07D7E00050769 /* MockMessage.swift in Sources */,
 				CE1CDC08256503CE0043C659 /* SearchViewController.swift in Sources */,
 				CEA248FA2588FBB300104F03 /* Message.swift in Sources */,
 				CEA248F42588A78B00104F03 /* ChatRoom.swift in Sources */,

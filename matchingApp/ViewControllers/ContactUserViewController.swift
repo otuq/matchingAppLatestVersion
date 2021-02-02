@@ -37,12 +37,6 @@ class ContactUserViewController: UIViewController {
         guard let userUid = Auth.auth().currentUser?.uid else { return }
         guard let anotherUid = anotherUser?.anotherUid else { return }
         let members = [userUid,anotherUid]
-        let uuid = NSUUID().uuidString
-        let data = [
-            "members": members,
-            "message": "まだメッセージありません",
-            "creatAt": Timestamp()
-        ]as [String: Any]
         //既に同じメンバーのchatRoomがある場合と新規で条件分岐させる。
         Firestore.firestore().collection("chatRooms").getDocuments { (documents, error) in
             if let err = error{
@@ -68,6 +62,12 @@ class ContactUserViewController: UIViewController {
                 }
             }
             if Set(members) != Set(self.anotherMember){
+                let uuid = NSUUID().uuidString
+                let data = [
+                    "members": members,
+                    "message": "まだメッセージありません",
+                    "creatAt": Timestamp()
+                ]as [String: Any]
                 self.newChat(uuid: uuid, data: data)
             }
         }

@@ -64,6 +64,9 @@ class SearchViewController: UIViewController {
     private func viewSetting(){
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
+        let customLayout = CustomLayout()
+        customLayout.delegate = self
+        searchCollectionView.collectionViewLayout = customLayout
         searchCollectionView.register(UINib(nibName: "SearchCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: cellId)
     }
     
@@ -82,6 +85,7 @@ class SearchViewController: UIViewController {
 
 // MARK: - UICollectionViewDelegate,UICollectionViewDataSource
 extension SearchViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return anotherUsers.count
     }
@@ -104,14 +108,22 @@ extension SearchViewController: UICollectionViewDelegate,UICollectionViewDataSou
         navigationController?.pushViewController(viewController, animated: true)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = self.view.frame.width/cellColums
-        return CGSize(width: width, height: width)
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let width = self.view.frame.width/cellColums
+//        let height = CGFloat.random(in: 200...400)
+//        return CGSize(width: width, height: height)
+//    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0
+//    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0
+//    }
+    
+}
+
+extension SearchViewController: CustomDelegate{
+    func collectionView(_ collectionView: UICollectionView, heightForItemAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat.random(in: 200...400)
     }
 }

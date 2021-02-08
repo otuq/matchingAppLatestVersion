@@ -142,10 +142,12 @@ extension ChatMessageViewController: MessagesDisplayDelegate{
     //アイコンのセット
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         guard let url = URL(string: user?.imageUrl ?? "") else { return }
-        guard let imageData = try? Data(contentsOf: url) else { return }
-        let image = UIImage(data: imageData)
-        let avatar = Avatar(image: image, initials: message.sender.displayName)
-        avatarView.set(avatar: avatar)
+        Nuke.loadImage(with: url, into: avatarView)
+        
+//        guard let imageData = try? Data(contentsOf: url) else { return }
+//        let image = UIImage(data: imageData)
+//        let avatar = Avatar(image: image, initials: message.sender.displayName)
+        
     }
 }
 //MARK: -MessagesLayoutDelegate
@@ -159,6 +161,7 @@ extension ChatMessageViewController: MessagesLayoutDelegate{
     func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return 16
     }
+    
 }
 //MARK: -InputBarAccessoryViewDelegate
 extension ChatMessageViewController: InputBarAccessoryViewDelegate{

@@ -18,9 +18,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NFj-Wx-C6P">
-                                <rect key="frame" x="0.0" y="44" width="600" height="507"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Kbh-gl-oqo">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jwK-km-sx9">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -41,10 +41,10 @@
                         <viewLayoutGuide key="safeArea" id="tsV-ZN-xJZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="NFj-Wx-C6P" firstAttribute="leading" secondItem="tsV-ZN-xJZ" secondAttribute="leading" id="PTP-ca-Fl4"/>
+                            <constraint firstItem="tsV-ZN-xJZ" firstAttribute="trailing" secondItem="NFj-Wx-C6P" secondAttribute="trailing" id="2JA-3B-JL4"/>
+                            <constraint firstItem="NFj-Wx-C6P" firstAttribute="leading" secondItem="tsV-ZN-xJZ" secondAttribute="leading" id="PbB-Ok-Uo6"/>
                             <constraint firstItem="NFj-Wx-C6P" firstAttribute="top" secondItem="tsV-ZN-xJZ" secondAttribute="top" id="iKk-l6-SIE"/>
                             <constraint firstItem="tsV-ZN-xJZ" firstAttribute="bottom" secondItem="NFj-Wx-C6P" secondAttribute="bottom" id="l0G-UE-1Um"/>
-                            <constraint firstItem="tsV-ZN-xJZ" firstAttribute="trailing" secondItem="NFj-Wx-C6P" secondAttribute="trailing" id="sg1-kb-UHC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="p9t-w8-Owe">
@@ -56,7 +56,7 @@
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="searchCollectionView" destination="NFj-Wx-C6P" id="ZDC-yW-1W1"/>
+                        <outlet property="searchCollectionView" destination="NFj-Wx-C6P" id="BMu-tx-UH2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1HA-B3-BT8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

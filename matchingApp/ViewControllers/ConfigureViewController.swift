@@ -38,6 +38,7 @@ class ConfigureViewController: FormViewController {
         self.dismiss(animated: true, completion: nil)
     }
     @objc private func tapActionSave(){
+        //ユーザーが変更したformのデータをFirebaseにアップロード
         let updateData = form.values()
         
         guard let uid = Auth.auth().currentUser?.uid else { return }

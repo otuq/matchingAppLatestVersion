@@ -18,8 +18,11 @@ class SearchViewController: UIViewController {
     
     private let cellId = "cellId"
     private let cellColums: CGFloat = 2
-    private var anotherUsers = [User]()
+    //絞り込み検索で使う
+    var duplicateAnotherUsers: [User]?
+    var anotherUsers = [User]()
 //    private var anotherUserListener:
+    private let refreshCtrl = UIRefreshControl()
     
     @IBOutlet weak var searchCollectionView: UICollectionView!
     
@@ -31,13 +34,31 @@ class SearchViewController: UIViewController {
             print(error)
         }
     }
+    @IBAction func narrowdownBUtton(_ sender: Any) {
+        let storyboard = UIStoryboard.init(name: "NarrowDown", bundle: nil)
+        let viewcontroller = storyboard.instantiateViewController(withIdentifier: "NarrowDownViewController")
+        self.navigationController?.pushViewController(viewcontroller, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         whenNewUser(logoutBool: false)
+        delegateSetting()
         viewSetting()
         fetchUserInfo()
+        refreshSetting()
+    }
+    //下にスワイプしてリロード
+    private func refreshSetting(){
+        searchCollectionView.refreshControl = refreshCtrl
+        refreshCtrl.addTarget(self, action: #selector(self.refresh(sender:)), for: .valueChanged)
+    }
+    
+    @objc private func refresh(sender: UIRefreshControl){
+        fetchUserInfo()
+        searchCollectionView.reloadData()
+        sender.endRefreshing()
     }
     
     func fetchUserInfo(){
@@ -56,17 +77,21 @@ class SearchViewController: UIViewController {
                 let anotherUser = User(dic: dic)
                 anotherUser.anotherUid = document.documentID
                 self.anotherUsers.append(anotherUser)
+                self.duplicateAnotherUsers = self.anotherUsers
                 self.searchCollectionView.reloadData()
             })
         }
     }
     
-    private func viewSetting(){
+    func delegateSetting(){
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
         let customLayout = CustomLayout()
         customLayout.delegate = self
         searchCollectionView.collectionViewLayout = customLayout
+    }
+    
+    private func viewSetting(){
         searchCollectionView.register(UINib(nibName: "SearchCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: cellId)
     }
     

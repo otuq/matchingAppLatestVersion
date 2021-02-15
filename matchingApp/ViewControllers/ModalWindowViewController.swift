@@ -17,11 +17,10 @@ class ModalWindowViewController: UIViewController {
     
     weak var delegate: PhotoEditDelegate?
     
-    @IBOutlet weak var profileStuckView: UIStackView!
-    
     @IBAction func photoEditButton(_ sender: Any) {
         self.dismiss(animated: true) {
             let edit = "photo"
+            //ProfileViewControllerから
             self.delegate?.tapActionPhotoEdit(edit: edit)
         }
     }
@@ -29,6 +28,7 @@ class ModalWindowViewController: UIViewController {
     @IBAction func profileEditButton(_ sender: Any) {
         self.dismiss(animated: true) {
             let edit = "profile"
+            //ProfileViewControllerから
             self.delegate?.tapActionPhotoEdit(edit: edit)
         }
         

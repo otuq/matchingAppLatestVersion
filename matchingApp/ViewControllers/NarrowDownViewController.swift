@@ -11,7 +11,6 @@ import Eureka
 
 class NarrowDownViewController: FormViewController {
     
-    private var user: User?
     private let userdefaults = UserDefaults.standard
     private let age = { () -> [String] in
         var array = [Int](18...100).map{String($0) + "歳"}
@@ -22,7 +21,6 @@ class NarrowDownViewController: FormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         settingView()
         formSetting()
     }
@@ -31,29 +29,27 @@ class NarrowDownViewController: FormViewController {
         self.navigationItem.leftBarButtonItem = .init(title: "閉じる", style: .plain, target: self, action: #selector(tapActionClose))
         self.navigationItem.rightBarButtonItem = .init(title: "検索", style: .plain, target: self, action: #selector(tapActionSave))
     }
-    
     @objc private func tapActionClose(){
         self.navigationController?.popViewController(animated: true)
     }
     @objc private func tapActionSave(){
         //絞り込み検索。formのデータからsearchに格納している他ユーザー情報を絞り込む。
         let formValues = form.values()
-        user = User.init(dic: formValues as [String: Any])
+        let values = User.init(dic: formValues as [String: Any])
         guard let nav = self.navigationController else { return }
         let searchVC = nav.viewControllers[nav.viewControllers.count-2]as? SearchViewController
-        guard var users = searchVC?.duplicateAnotherUsers else { return }
+        guard var anotherUsers = searchVC?.duplicateAnotherUsers else { return }
         //Firebaseから取得しているanotherUsersをコピーしてそれを元に絞り込む。
-        users = user?.gender != "未設定" ? users.filter({$0.gender == user?.gender}): users
-        users = user?.age != "未設定" ? users.filter({$0.age == user?.age}): users
-        users = user?.location != "未設定" ? users.filter({$0.location == user?.location}): users
-        searchVC?.anotherUsers = users
+        anotherUsers = values.gender != "未設定" ? anotherUsers.filter({$0.gender == values.gender}): anotherUsers
+        anotherUsers = values.age != "未設定" ? anotherUsers.filter({$0.age == values.age}): anotherUsers
+        anotherUsers = values.location != "未設定" ? anotherUsers.filter({$0.location == values.location}): anotherUsers
+        searchVC?.anotherUsers = anotherUsers
         searchVC?.delegateSetting()
         searchVC?.searchCollectionView.reloadData()
         userdefaults.set(formValues, forKey: "form")
         self.navigationController?.popViewController(animated: true)
     }
     private func formSetting(){
-        
         let formValues = userdefaults.object(forKey: "form")as? [String: Any]
         let values = User.init(dic: formValues ?? [:])
         self.form +++ Section("section1")

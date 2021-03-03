@@ -16,9 +16,6 @@ class StartUpViewController: UIViewController {
     enum PickerTag: Int{
         case age,locaton
     }
-    
-    var logoutBool = false
-    
     @IBOutlet weak var userProfileImageView: UIButton!
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var userGenderSegment: UISegmentedControl!
@@ -43,12 +40,10 @@ class StartUpViewController: UIViewController {
         settingProperty()
         settingPickerView()
     }
-    
     private func settingPickerView(){
         createPickerView(userAgeTextField,agePickerView,tag: .age)
         createPickerView(userLocationTextField,locationPickerView,tag: .locaton)
     }
-    
     private func createPickerView(_ textField: UITextField,_ pickerView: UIPickerView, tag: PickerTag){
         //キーボードにピッカービューをinputする。
         pickerView.delegate = self
@@ -65,20 +60,10 @@ class StartUpViewController: UIViewController {
         //toolbarをキーボードの上に設置する。
         textField.inputAccessoryView = toolbar
     }
-    
     @objc private func tapActionDoneButton(){
         userAgeTextField.endEditing(true)
         userLocationTextField.endEditing(true)
     }
-    
-    private func settingView(){
-        userNameTextField.delegate = self
-        userLocationTextField.delegate = self
-        userProfileImageView.addTarget(self, action: #selector(tapActionPickerView), for: .touchUpInside)
-        userGenderSegment.addTarget(self, action: #selector(segmentChange), for: UIControl.Event.valueChanged)
-        registerButton.addTarget(self, action: #selector(tapActionRegister), for: .touchUpInside)
-    }
-    
     private func settingProperty(){
         genderValue = userGenderSegment.titleForSegment(at: 0)
         userAgeTextField.text = "未設定"
@@ -90,24 +75,29 @@ class StartUpViewController: UIViewController {
         registerButton.isEnabled = false
         registerButton.layer.opacity = 0.5
     }
-    
+    private func settingView(){
+        userNameTextField.delegate = self
+        userLocationTextField.delegate = self
+        userProfileImageView.addTarget(self, action: #selector(tapActionPickerView), for: .touchUpInside)
+        userGenderSegment.addTarget(self, action: #selector(segmentChange), for: UIControl.Event.valueChanged)
+        registerButton.addTarget(self, action: #selector(tapActionRegister), for: .touchUpInside)
+    }
     @objc private func tapActionPickerView(){
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
         self.present(picker, animated: true, completion: nil)
     }
-    
     @objc private func segmentChange(segment: UISegmentedControl){
         let segmentIndex = segment.selectedSegmentIndex
         genderValue = userGenderSegment.titleForSegment(at: segmentIndex)
     }
-    
     @objc private func tapActionRegister(){
         guard let image = userProfileImageView.imageView?.image ?? UIImage(named: "tsuno") else { return }
         guard let jpgData = image.jpegData(compressionQuality: 0.3) else { return }
         let userDefault = UserDefaults.standard
         let uuidString = NSUUID().uuidString
+        //Profileのアップデートで使う
         userDefault.set(uuidString, forKey: "uuid")
         let storageRef = Storage.storage().reference().child("prifile_image").child(uuidString)
         storageRef.putData(jpgData, metadata: nil) { (updataData, error) in
@@ -119,12 +109,12 @@ class StartUpViewController: UIViewController {
                 if let err = error{
                     print("ダウンロードurlの取得に失敗しました。",err)
                 }
+                //URL型をStringに変換
                 guard let urlString = url?.absoluteString else { return }
                 self.authenticationFirestore(url: urlString)
             }
         }
     }
-    
     private func authenticationFirestore(url: String){
         Auth.auth().signInAnonymously() { (authResult, error) in
             if let err = error{
@@ -135,7 +125,6 @@ class StartUpViewController: UIViewController {
             guard let user = authResult?.user else { return }
             //            let isAnonymous = user.isAnonymous  // true
             let uid = user.uid
-            
             guard let userName = self.userNameTextField.text else { return }
             guard let gender = self.genderValue else { return }
             guard let age = self.userAgeTextField.text else { return }
@@ -155,30 +144,33 @@ class StartUpViewController: UIViewController {
                     return
                 }
                 print("データの保存に成功しました。")
-                //モーダルウィンドウでNavigationControllerを遡る時TabbarControllerをまずキャストして選択されたviewControllerをキャストする
-                let tab = self.presentingViewController as! TabbarViewController
-                print(self.logoutBool)
-                if self.logoutBool{
-                    tab.viewControllers?.forEach({ (viewController) in
-                        let nav = viewController as! UINavigationController
-                        let vc = nav.viewControllers[nav.viewControllers.count-1]
-                        if vc is SearchViewController{
-                            let searchVC = vc as! SearchViewController
-                            searchVC.fetchUserInfo()
-                            self.dismiss(animated: true, completion: nil)
-                        }else if vc is ProfileViewController{
-                            let profileVC = vc as! ProfileViewController
-                            profileVC.fetchUserInfo()
-                            self.dismiss(animated: true, completion: nil)
-                        }
-                    })
-                }else{
-                    let nav = tab.selectedViewController as! UINavigationController
-                    let searchVC = nav.viewControllers[nav.viewControllers.count-1]as? SearchViewController
-                    searchVC?.fetchUserInfo()
+                self.logoutJudgment()
+            }
+        }
+    }
+    func logoutJudgment(judgment: Bool = false){
+        //モーダルウィンドウでNavigationControllerを遡る時TabbarControllerをまずキャストして選択されたviewControllerをキャストする
+        let tab = self.presentingViewController as! TabbarViewController
+        print(judgment)
+        if judgment{
+            tab.viewControllers?.forEach({ (viewController) in
+                let nav = viewController as! UINavigationController
+                let vc = nav.viewControllers[nav.viewControllers.count-1]
+                if vc is SearchViewController{
+                    let searchVC = vc as! SearchViewController
+                    searchVC.fetchUserInfo()
+                    self.dismiss(animated: true, completion: nil)
+                }else if vc is ProfileViewController{
+                    let profileVC = vc as! ProfileViewController
+                    profileVC.fetchUserInfo()
                     self.dismiss(animated: true, completion: nil)
                 }
-            }
+            })
+        }else{
+            let nav = tab.selectedViewController as! UINavigationController
+            let searchVC = nav.viewControllers[nav.viewControllers.count-1]as? SearchViewController
+            searchVC?.fetchUserInfo()
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }

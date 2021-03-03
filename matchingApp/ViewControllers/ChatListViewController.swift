@@ -20,7 +20,6 @@ class ChatListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         settingView()
         fetchChatRoom()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: .reload, object: nil)
@@ -28,7 +27,6 @@ class ChatListViewController: UIViewController {
     @objc func reloadTableData(){
         fetchChatRoom()
     }
-    
     private func settingView(){
         chatListTableView.delegate = self
         chatListTableView.dataSource = self
@@ -60,9 +58,9 @@ class ChatListViewController: UIViewController {
         let data = documentChange.document.data()
         let chatRoom = ChatRoom.init(dic: data)
         chatRoom.documentId = documentChange.document.documentID
-        
         guard let uid = Auth.auth().currentUser?.uid else { return }
         if !chatRoom.members.contains(uid){ return }
+        
         chatRoom.members.forEach { (anotherUid) in
             if uid != anotherUid{
                 Firestore.firestore().collection("user").document(anotherUid).getDocument { (snapshot, error) in
@@ -70,30 +68,24 @@ class ChatListViewController: UIViewController {
                         print("パートナーUserの情報の取得に失敗しました。",err)
                     }
                     print("パートナーUserの情報の取得に成功しました。")
-                    
                     guard let data = snapshot?.data() else { return }
                     let anotherUser = User.init(dic: data)
                     anotherUser.anotherUid = snapshot?.documentID
                     chatRoom.anotherUser = anotherUser
-                        
                     guard let chatRoomId = chatRoom.documentId else { return }
                     let latestMessageId = chatRoom.latestMessageId
-                    
                     if latestMessageId.isEmpty{
                         self.chatRooms.append(chatRoom)
                         self.chatListTableView.reloadData()
                         return
                     }
-
                     Firestore.firestore().collection("chatRooms").document(chatRoomId).collection("messages").document(latestMessageId).getDocument { (snapshot, error) in
                         if let err = error{
                             print("最新メッセージの取得に失敗しました。",err)
                         }
                         print("最新メッセージの取得に成功しました。")
-                        
                         guard let data = snapshot?.data() else { return }
                         let messageData = Message.init(dic: data)
-                        
                         chatRoom.latestMessage = messageData
                         self.chatRooms.append(chatRoom)
                         self.chatListTableView.reloadData()

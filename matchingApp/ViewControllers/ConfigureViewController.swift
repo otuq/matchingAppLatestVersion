@@ -24,7 +24,6 @@ class ConfigureViewController: FormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         settingView()
         formSetting()
     }
@@ -33,14 +32,12 @@ class ConfigureViewController: FormViewController {
         self.navigationItem.leftBarButtonItem = .init(title: "閉じる", style: .plain, target: self, action: #selector(tapActionClose))
         self.navigationItem.rightBarButtonItem = .init(title: "保存", style: .plain, target: self, action: #selector(tapActionSave))
     }
-    
     @objc private func tapActionClose(){
         self.dismiss(animated: true, completion: nil)
     }
     @objc private func tapActionSave(){
         //ユーザーが変更したformのデータをFirebaseにアップロード
         let updateData = form.values()
-        
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection("user").document(uid).updateData(updateData as [AnyHashable : Any]) { (error) in
             if let err = error{
@@ -48,7 +45,6 @@ class ConfigureViewController: FormViewController {
                 return
             }
             print("ユーザー情報のアップデートに成功しました。")
-            
             let tab = self.presentingViewController as! UITabBarController
             let nav = tab.selectedViewController as! UINavigationController
             let profileVC = nav.viewControllers[nav.viewControllers.count-1]as? ProfileViewController
@@ -68,7 +64,6 @@ class ConfigureViewController: FormViewController {
                 $0.value = self.user?.gender
             }
             <<< PickerInputRow<String>("age"){
-                
                 $0.options = age()
                 $0.title = "年齢"
                 $0.value = self.user?.age

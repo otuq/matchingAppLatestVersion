@@ -27,7 +27,6 @@ class ProfileViewController: UIViewController {
         settingView()
         fetchUserInfo()
     }
-    
     private func settingView(){
         userImageView.layer.cornerRadius = userImageView.bounds.width/2
         userImageView.contentMode = .scaleAspectFill
@@ -35,7 +34,6 @@ class ProfileViewController: UIViewController {
         userProfileEditButton.layer.borderWidth = 1
         userProfileEditButton.addTarget(self, action: #selector(tapActionProfileEdit), for: .touchUpInside)
     }
-    
     @objc private func tapActionProfileEdit(){
         let storyborad = UIStoryboard.init(name: "ModalWindow", bundle: nil)
         let viewController = storyborad.instantiateViewController(withIdentifier: "ModalWindowViewController")as! ModalWindowViewController
@@ -45,7 +43,6 @@ class ProfileViewController: UIViewController {
         nav.modalPresentationStyle = .overFullScreen
         self.present(nav, animated: true, completion: nil)
     }
-    
     func fetchUserInfo(){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection("user").document(uid).getDocument { (snapshot, error) in
@@ -71,7 +68,6 @@ class ProfileViewController: UIViewController {
 //MARK: -PhotoEditDelegate
 extension ProfileViewController: PhotoEditDelegate{
     func tapActionPhotoEdit(edit: String) {
-        
         if edit == "photo"{
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
@@ -100,7 +96,6 @@ extension ProfileViewController: UIImagePickerControllerDelegate,UINavigationCon
         storageUpdate()
         self.dismiss(animated: true, completion: nil)
     }
-    
     private func storageUpdate(){
         let userDefault = UserDefaults.standard
         guard let uuid = userDefault.string(forKey: "uuid") else { return }
@@ -124,7 +119,6 @@ extension ProfileViewController: UIImagePickerControllerDelegate,UINavigationCon
             }
         }
     }
-    
     private func updateImageUrlFirestore(url: String){
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let updateData = ["imageUrl": url]

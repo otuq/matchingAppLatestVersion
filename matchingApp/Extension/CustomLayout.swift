@@ -10,7 +10,7 @@ import UIKit
 class CustomLayout: UICollectionViewLayout{
     weak var delegate: CustomDelegate!
     private var numberOfColumns = 2
-    private var columPadding: CGFloat = 5
+    private var columPadding: CGFloat = 15
     private var attributeArray = [UICollectionViewLayoutAttributes]()
     private var contentHeight: CGFloat = 0
     private var contentWidth: CGFloat {
@@ -37,7 +37,7 @@ class CustomLayout: UICollectionViewLayout{
         
         for item in 0..<collectionView.numberOfItems(inSection: 0){
             let indexPath = IndexPath(item: item, section: 0)
-            let cellHeight = delegate.collectionView(collectionView, heightForItemAt: indexPath)
+            let cellHeight = delegate.collectionView(collectionView, heightForItemAt: indexPath, contentWidth: columnWidth - columPadding * 2)
             //上下のpaddingを計算にいれた高さ
             let height = columPadding * 2 + cellHeight
             let frame = CGRect(x: xOffset[colum], y: yOffset[colum], width: columnWidth, height: height)
@@ -64,5 +64,5 @@ class CustomLayout: UICollectionViewLayout{
 }
 
 protocol CustomDelegate: class {
-    func collectionView(_ collectionView: UICollectionView, heightForItemAt indexPath: IndexPath) -> CGFloat
+    func collectionView(_ collectionView: UICollectionView, heightForItemAt indexPath: IndexPath, contentWidth: CGFloat) -> CGFloat
 }

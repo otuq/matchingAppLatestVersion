@@ -55,7 +55,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="gearshape" catalog="system" id="9Oc-XV-G7o">
                             <connections>
-                                <action selector="narrowdownBUtton:" destination="0Tt-yS-A3T" id="NmC-Ih-jNB"/>
+                                <action selector="narrowDownButton:" destination="0Tt-yS-A3T" id="NmC-Ih-jNB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -16,8 +16,10 @@ class User{
     let location: String
     let imageUrl: String
     let creatAt: Timestamp
+    let loginTime: Timestamp
     
     var anotherUid: String?
+    var height: CGFloat?
     
     init(dic: [String: Any]) {
         name = dic["name"]as? String ?? ""
@@ -26,5 +28,6 @@ class User{
         location = dic["location"]as? String ?? ""
         imageUrl = dic["imageUrl"]as? String ?? ""
         creatAt = dic["creatAt"]as? Timestamp ?? Timestamp()
+        loginTime = dic["loginTime"]as? Timestamp ?? Timestamp()
     }
 }

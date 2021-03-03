@@ -23,7 +23,6 @@ class ContactUserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         settingView()
         userInfoUISetting()
     }
@@ -85,7 +84,6 @@ class ContactUserViewController: UIViewController {
                     return
                 }
                 guard let data = snapshot?.data() else { return }
-                
                 let storyboard = UIStoryboard.init(name: "ChatMessage", bundle: nil)
                 let viewController = storyboard.instantiateViewController(withIdentifier: "ChatMessageViewController")as! ChatMessageViewController
                 let chatRoom = ChatRoom(dic: data)
@@ -96,7 +94,6 @@ class ContactUserViewController: UIViewController {
             }
         }
     }
-    
     private func userInfoUISetting(){
         guard let anotherUser = anotherUser else { return }
         self.usernameLabel.text = anotherUser.name

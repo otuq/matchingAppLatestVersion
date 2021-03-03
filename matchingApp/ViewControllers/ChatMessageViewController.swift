@@ -17,9 +17,7 @@ struct Sender: SenderType {
     var senderId: String
     var displayName: String
 }
-
 class ChatMessageViewController: MessagesViewController {
-    
     private var user: User?
     private var messageListner: ListenerRegistration?
     private lazy var messageList = [MockMessage]()
@@ -35,7 +33,6 @@ class ChatMessageViewController: MessagesViewController {
             self.messagesCollectionView.scrollToBottom()
         }
     }
-    
     private func messageKitSetting(){
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messageCellDelegate = self
@@ -48,6 +45,7 @@ class ChatMessageViewController: MessagesViewController {
     }
     private func fetchUserInfo(){
         guard let uid = Auth.auth().currentUser?.uid else { return }
+
         Firestore.firestore().collection("user").document(uid).getDocument { (snapshot, error) in
             if let err = error{
                 print("ユーザー情報の取得に失敗しました。",err)
@@ -59,7 +57,6 @@ class ChatMessageViewController: MessagesViewController {
         }
     }
     private func fetchChatRoomInfo(){
-        
         messageListner?.remove()
         messageList.removeAll()
         messagesCollectionView.reloadData()
@@ -98,7 +95,6 @@ extension ChatMessageViewController: MessagesDataSource{
         }
         return currentSender()
     }
-    
     //indexpathでメッセージの中身を呼び出す
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         messageList.sort { (m1, m2) -> Bool in
@@ -143,7 +139,6 @@ extension ChatMessageViewController: MessagesDisplayDelegate{
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         guard let url = URL(string: user?.imageUrl ?? "") else { return }
         Nuke.loadImage(with: url, into: avatarView)
-        
 //        guard let imageData = try? Data(contentsOf: url) else { return }
 //        let image = UIImage(data: imageData)
 //        let avatar = Avatar(image: image, initials: message.sender.displayName)
@@ -161,11 +156,9 @@ extension ChatMessageViewController: MessagesLayoutDelegate{
     func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return 16
     }
-    
 }
 //MARK: -InputBarAccessoryViewDelegate
 extension ChatMessageViewController: InputBarAccessoryViewDelegate{
-    
     //送信ボタンを押した時の処理
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         sendMessageFirestore(text: text)
@@ -174,13 +167,11 @@ extension ChatMessageViewController: InputBarAccessoryViewDelegate{
         messagesCollectionView.scrollToBottom()
     }
     private func sendMessageFirestore(text: String){
-        
         guard let userName = user?.name else { return }
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let chatRoomId = chatRoom?.documentId else { return }
         let creatAt = Timestamp()
         let messageId = randomString(length: 20)
-        
         let messageData = [
             "name": userName,
             "message": text,
@@ -193,10 +184,8 @@ extension ChatMessageViewController: InputBarAccessoryViewDelegate{
                 print("メッサージ情報の保存に失敗しました。",err)
                 return
             }
-            
             let message = MockMessage(text: text, sender: self.currentSender(), messageId: messageId, date: creatAt.dateValue())
             self.messageList.append(message)
-            
             let latestMessageData = [
                 "latestMessageId": messageId,
                 "creatAt": creatAt

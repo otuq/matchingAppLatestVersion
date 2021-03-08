@@ -17,6 +17,7 @@ class ChatRoom {
     var documentId: String?
     var anotherUser: User?
     var latestMessage: Message?
+    var currentUser: User?
     
     init(dic: [String: Any]) {
         members = dic["members"]as? [String] ?? []

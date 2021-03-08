@@ -18,14 +18,12 @@ struct Sender: SenderType {
     var displayName: String
 }
 class ChatMessageViewController: MessagesViewController {
-    private var user: User?
     private var messageListner: ListenerRegistration?
     private lazy var messageList = [MockMessage]()
     var chatRoom: ChatRoom?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchUserInfo()
         fetchChatRoomInfo()
         messageKitSetting()
         //メッセージを開いた時最新メッセージまでスクロール　非同期処理する必要があるみたい
@@ -42,19 +40,6 @@ class ChatMessageViewController: MessagesViewController {
         scrollsToBottomOnKeyboardBeginsEditing = true
         maintainPositionOnKeyboardFrameChanged = true
         scrollsToLastItemOnKeyboardBeginsEditing = true
-    }
-    private func fetchUserInfo(){
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-
-        Firestore.firestore().collection("user").document(uid).getDocument { (snapshot, error) in
-            if let err = error{
-                print("ユーザー情報の取得に失敗しました。",err)
-                return
-            }
-            guard let dic = snapshot?.data() else { return }
-            let user = User(dic: dic)
-            self.user = user
-        }
     }
     private func fetchChatRoomInfo(){
         messageListner?.remove()
@@ -74,7 +59,7 @@ class ChatMessageViewController: MessagesViewController {
                     let messageId = documentChange.document.documentID
                     let dic = documentChange.document.data()
                     let message = Message.init(dic: dic)
-                    let sender = Sender(senderId: message.uid, displayName: message.name)
+                    let sender = Sender(senderId: message.uid, displayName: self.chatRoom?.currentUser?.name ?? "nil")
                     let mockMessage = MockMessage(text: message.message, sender: sender, messageId: messageId, date: message.creatAt.dateValue())
                     self.messageList.append(mockMessage)
                     self.messagesCollectionView.reloadData()
@@ -85,13 +70,16 @@ class ChatMessageViewController: MessagesViewController {
             })
         }
     }
+    override func didReceiveMemoryWarning() {
+        self.didReceiveMemoryWarning()
+    }
 }
 //MARK: -MessagesDataSource
 extension ChatMessageViewController: MessagesDataSource{
     //自身の情報を設定する
     func currentSender() -> SenderType {
         if let uid = Auth.auth().currentUser?.uid{
-            return Sender(senderId: uid, displayName: user?.name ?? "")
+            return Sender(senderId: uid, displayName: chatRoom?.currentUser?.name ?? "nil")
         }
         return currentSender()
     }
@@ -102,15 +90,28 @@ extension ChatMessageViewController: MessagesDataSource{
             let sort2 = m2.sentDate
             return sort1 < sort2
         }
+        //collectionViewとかの時だとsectionじゃなくrow使うが、messageKitだとsectionみたい
         return messageList[indexPath.section]
     }
     //表示するメッセージの数
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return messageList.count
     }
-    func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+    //messageの上のLabel
+    func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
         let name = message.sender.displayName
         return NSAttributedString(string: name, attributes: [.font: UIFont.preferredFont(forTextStyle: .caption1),.foregroundColor: UIColor(white: 0.3, alpha: 1.0)])
+    }
+    //messageの下のLabel
+//    func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+//    }
+    func messageTimestampLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        let dated = messageList[indexPath.section].sentDate
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        dateFormatter.locale = Locale.init(identifier: "ja_JP")
+        let date = dateFormatter.string(from: dated)
+        return NSAttributedString(string: date, attributes: [.font: UIFont.preferredFont(forTextStyle: .caption1),.foregroundColor: UIColor(white: 0.3, alpha: 1.0)])
     }
 }
 //MARK: -MessageCellDelegate
@@ -137,7 +138,7 @@ extension ChatMessageViewController: MessagesDisplayDelegate{
     }
     //アイコンのセット
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
-        guard let url = URL(string: user?.imageUrl ?? "") else { return }
+        guard let url = URL(string: chatRoom?.currentUser?.imageUrl ?? "") else { return }
         Nuke.loadImage(with: url, into: avatarView)
 //        guard let imageData = try? Data(contentsOf: url) else { return }
 //        let image = UIImage(data: imageData)
@@ -148,13 +149,16 @@ extension ChatMessageViewController: MessagesDisplayDelegate{
 //MARK: -MessagesLayoutDelegate
 extension ChatMessageViewController: MessagesLayoutDelegate{
     func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        return 18
+        return 0
     }
     func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        return 20
+        return 18
     }
     func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return 16
+    }
+    func cellBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+        return 0
     }
 }
 //MARK: -InputBarAccessoryViewDelegate
@@ -167,7 +171,7 @@ extension ChatMessageViewController: InputBarAccessoryViewDelegate{
         messagesCollectionView.scrollToBottom()
     }
     private func sendMessageFirestore(text: String){
-        guard let userName = user?.name else { return }
+        guard let userName = chatRoom?.currentUser?.name else { return }
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let chatRoomId = chatRoom?.documentId else { return }
         let creatAt = Timestamp()
@@ -184,8 +188,6 @@ extension ChatMessageViewController: InputBarAccessoryViewDelegate{
                 print("メッサージ情報の保存に失敗しました。",err)
                 return
             }
-            let message = MockMessage(text: text, sender: self.currentSender(), messageId: messageId, date: creatAt.dateValue())
-            self.messageList.append(message)
             let latestMessageData = [
                 "latestMessageId": messageId,
                 "creatAt": creatAt
@@ -197,11 +199,13 @@ extension ChatMessageViewController: InputBarAccessoryViewDelegate{
                 }
                 print("最新メッセージ情報の保存に成功しました。")
                 //Notification.Nameを拡張して通知名を追加する。下記のコードで通知を投稿する。リロードするChatListViewControllerにaddObserverを追加する。
-                NotificationCenter.default.post(name: .reload, object: nil)
+                //navigationViewController.viewControllers[...... を使うとsearchVCから遷移してきた時にchatListVCにアクセスできない。
+                NotificationCenter.default.post(name: .latestMessageUpdate, object: nil)
             }
         }
     }
 }
+
 private func randomString(length: Int)->String{
     let letters: NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789"
     let length = UInt32(letters.length)

@@ -10,6 +10,7 @@ import UIKit
 import FirebaseFirestore
 import FirebaseAuth
 
+
 class SearchViewController: UIViewController {
     
     private let cellId = "cellId"
@@ -28,7 +29,7 @@ class SearchViewController: UIViewController {
     @IBAction func logoutButton(_ sender: Any) {
         do{
             try Auth.auth().signOut()
-            self.whenNewUser(judgment: true)
+            self.whenNewUser()
         }catch{
             print(error)
         }
@@ -41,7 +42,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         executeOnce()
-        whenNewUser(judgment: false)
+        whenNewUser()
         viewSetting()
         fetchUserInfo()
         delegateSetting()
@@ -98,11 +99,11 @@ class SearchViewController: UIViewController {
                 self.duplicateAnotherUsers = self.anotherUsers
             })
             //データの取得を完了した後に行わないと意味がないのでFirebaseのスコープ内に絞り込みのコードを書く。
-            guard let formValues = self.userdefaults.object(forKey: "form")as? [String: Any] else { return }
-            let values = User.init(dic: formValues)
-            self.anotherUsers = values.gender != "未設定" ? self.anotherUsers.filter({$0.gender == values.gender}): self.anotherUsers
-            self.anotherUsers = values.age != "未設定" ? self.anotherUsers.filter({$0.age == values.age}): self.anotherUsers
-            self.anotherUsers = values.location != "未設定" ? self.anotherUsers.filter({$0.location == values.location}): self.anotherUsers
+//            guard let formValues = self.userdefaults.object(forKey: "form")as? [String: Any] else { return }
+//            let values = User.init(dic: formValues)
+//            self.anotherUsers = values.gender != "未設定" ? self.anotherUsers.filter({$0.gender == values.gender}): self.anotherUsers
+//            self.anotherUsers = values.age != "未設定" ? self.anotherUsers.filter({$0.age == values.age}): self.anotherUsers
+//            self.anotherUsers = values.location != "未設定" ? self.anotherUsers.filter({$0.location == values.location}): self.anotherUsers
             self.searchCollectionView.reloadData()
         }
     }
@@ -117,16 +118,18 @@ class SearchViewController: UIViewController {
     private func viewSetting(){
         searchCollectionView.register(UINib(nibName: "SearchCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: cellId)
     }
-    private func whenNewUser(judgment: Bool){
+    private func whenNewUser(){
         if Auth.auth().currentUser?.uid == nil{
             let storyboard = UIStoryboard.init(name: "StartUp", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "StartUpViewController")as! StartUpViewController
-            viewController.logoutJudgment(judgment: judgment)
             let nav = UINavigationController.init(rootViewController: viewController)
             nav.modalPresentationStyle = .fullScreen
             nav.setNavigationBarHidden(true, animated: true)
             self.present(nav, animated: true, completion: nil)
         }
+    }
+    override func didReceiveMemoryWarning() {
+        self.didReceiveMemoryWarning()
     }
 }
 // MARK: - UICollectionViewDelegate,UICollectionViewDataSource

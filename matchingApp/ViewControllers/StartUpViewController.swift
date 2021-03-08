@@ -148,30 +148,36 @@ class StartUpViewController: UIViewController {
             }
         }
     }
-    func logoutJudgment(judgment: Bool = false){
+    func logoutJudgment(){
         //モーダルウィンドウでNavigationControllerを遡る時TabbarControllerをまずキャストして選択されたviewControllerをキャストする
         let tab = self.presentingViewController as! TabbarViewController
-        print(judgment)
-        if judgment{
-            tab.viewControllers?.forEach({ (viewController) in
-                let nav = viewController as! UINavigationController
-                let vc = nav.viewControllers[nav.viewControllers.count-1]
-                if vc is SearchViewController{
-                    let searchVC = vc as! SearchViewController
-                    searchVC.fetchUserInfo()
-                    self.dismiss(animated: true, completion: nil)
-                }else if vc is ProfileViewController{
-                    let profileVC = vc as! ProfileViewController
-                    profileVC.fetchUserInfo()
-                    self.dismiss(animated: true, completion: nil)
-                }
-            })
-        }else{
-            let nav = tab.selectedViewController as! UINavigationController
-            let searchVC = nav.viewControllers[nav.viewControllers.count-1]as? SearchViewController
-            searchVC?.fetchUserInfo()
-            self.dismiss(animated: true, completion: nil)
-        }
+        let nav = tab.selectedViewController as! UINavigationController
+        let searchVC = nav.viewControllers[nav.viewControllers.count-1]as? SearchViewController
+        searchVC?.viewDidLoad()
+        //他のVCもloadしてuser情報を更新する
+        NotificationCenter.default.post(name: .signUpLoad, object: nil)
+        self.dismiss(animated: true, completion: nil)
+
+//        if flag{
+//            tab.viewControllers?.forEach({ (viewController) in
+//                let nav = viewController as! UINavigationController
+//                let vc = nav.viewControllers[nav.viewControllers.count-1]
+//                if vc is SearchViewController{
+//                    let searchVC = vc as! SearchViewController
+//                    searchVC.fetchUserInfo()
+//                    self.dismiss(animated: true, completion: nil)
+//                }else if vc is ProfileViewController{
+//                    let profileVC = vc as! ProfileViewController
+//                    profileVC.fetchUserInfo()
+//                    self.dismiss(animated: true, completion: nil)
+//                }
+//            })
+//        }else{
+//            let nav = tab.selectedViewController as! UINavigationController
+//            let searchVC = nav.viewControllers[nav.viewControllers.count-1]as? SearchViewController
+//            searchVC?.fetchUserInfo()
+//            self.dismiss(animated: true, completion: nil)
+//        }
     }
 }
 //MARK: -UITextFieldDelegate

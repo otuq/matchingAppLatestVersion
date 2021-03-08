@@ -13,6 +13,7 @@ import FirebaseAuth
 class ChatListViewController: UIViewController {
 
     let cellId = "cellId"
+    private var user: User?
     var chatRooms = [ChatRoom]()
     private var chatRoomListner: ListenerRegistration?
     
@@ -22,9 +23,33 @@ class ChatListViewController: UIViewController {
         super.viewDidLoad()
         settingView()
         fetchChatRoom()
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTableData), name: .reload, object: nil)
+        fetchUserInfo()
+        NotificationCenter.default.addObserver(self, selector: #selector(latestMessageUpdate), name: .latestMessageUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(signUpLoad), name: .signUpLoad, object: nil)
+        //profile情報を更新したら通知される
+        NotificationCenter.default.addObserver(self, selector: #selector(profileUpdate), name: .profileUpdate, object: nil)
     }
-    @objc func reloadTableData(){
+    private func fetchUserInfo(){
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("user").document(uid).getDocument { (snapshot, error) in
+            if let err = error{
+                print("ユーザー情報の取得に失敗しました。",err)
+                return
+            }
+            guard let dic = snapshot?.data() else { return }
+            let user = User(dic: dic)
+            self.user = user
+        }
+    }
+    @objc private func profileUpdate(){
+        //profileで更新した情報を取得してreloadをしてchatMeesageVCへ値を渡して更新する。
+        fetchUserInfo()
+        chatListTableView.reloadData()
+    }
+    @objc private func signUpLoad(){
+        fetchChatRoom()
+    }
+    @objc private func latestMessageUpdate(){
         fetchChatRoom()
     }
     private func settingView(){
@@ -37,7 +62,6 @@ class ChatListViewController: UIViewController {
         chatRoomListner?.remove()
         chatRooms.removeAll()
         chatListTableView.reloadData()
-        
        chatRoomListner = Firestore.firestore().collection("chatRooms").addSnapshotListener { (snapshot, error) in
             if let err = error{
                 print("chatRoomの情報の取得に失敗しました。",err)
@@ -60,7 +84,6 @@ class ChatListViewController: UIViewController {
         chatRoom.documentId = documentChange.document.documentID
         guard let uid = Auth.auth().currentUser?.uid else { return }
         if !chatRoom.members.contains(uid){ return }
-        
         chatRoom.members.forEach { (anotherUid) in
             if uid != anotherUid{
                 Firestore.firestore().collection("user").document(anotherUid).getDocument { (snapshot, error) in
@@ -94,6 +117,9 @@ class ChatListViewController: UIViewController {
             }
         }
     }
+    override func didReceiveMemoryWarning() {
+        self.didReceiveMemoryWarning()
+    }
 }
 //MARK: -UITableViewDelegate, UITableViewDataSource
 extension ChatListViewController: UITableViewDelegate, UITableViewDataSource{
@@ -108,6 +134,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource{
             return sort1 > sort2
         }
         cell.chatRoom = chatRooms[indexPath.row]
+        cell.chatRoom?.currentUser = self.user
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -49,6 +49,7 @@ class ConfigureViewController: FormViewController {
             let nav = tab.selectedViewController as! UINavigationController
             let profileVC = nav.viewControllers[nav.viewControllers.count-1]as? ProfileViewController
             profileVC?.viewDidLoad()
+            NotificationCenter.default.post(name: .profileUpdate, object: nil)
             self.dismiss(animated: true, completion: nil)
         }
     }

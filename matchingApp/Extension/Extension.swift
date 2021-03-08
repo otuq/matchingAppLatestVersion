@@ -10,7 +10,10 @@ import Foundation
 import UIKit
 
 extension Notification.Name{
-    static let reload = Notification.Name("reload")
+    static let latestMessageUpdate = Notification.Name("latestMessageUpdate")
+    static let profileUpdate = Notification.Name("profileUpdate")
+    static let signUpLoad = Notification.Name("signUpLoad")
+
 }
 
 extension String{

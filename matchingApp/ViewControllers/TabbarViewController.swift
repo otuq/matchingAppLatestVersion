@@ -9,27 +9,4 @@
 import UIKit
 
 class TabbarViewController: UITabBarController {
-
-    enum ControllerName: Int {
-        case search,chat,profile
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        
-//        viewControllers?.enumerated().forEach({ (index,viewController) in
-//            if let name = ControllerName.init(rawValue: index){
-//                switch name {
-//                case .search:
-//                    
-//                case .chat:
-//                    
-//                case .profile:
-//                    
-//                }
-//            }
-//        })
-        
-    }
 }

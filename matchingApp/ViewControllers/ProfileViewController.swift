@@ -26,6 +26,10 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         settingView()
         fetchUserInfo()
+        NotificationCenter.default.addObserver(self, selector: #selector(signUpLoad), name: .signUpLoad, object: nil)
+    }
+    @objc private func signUpLoad(){
+        fetchUserInfo()
     }
     private func settingView(){
         userImageView.layer.cornerRadius = userImageView.bounds.width/2
@@ -41,6 +45,7 @@ class ProfileViewController: UIViewController {
         viewController.delegate = self
         let nav = UINavigationController.init(rootViewController: viewController)
         nav.modalPresentationStyle = .overFullScreen
+        nav.modalTransitionStyle = .crossDissolve
         self.present(nav, animated: true, completion: nil)
     }
     func fetchUserInfo(){
@@ -128,7 +133,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate,UINavigationCon
                 return
             }
             print("Firestoreへのアップデートに成功しました。")
-            
+            NotificationCenter.default.post(name: .profileUpdate, object: nil)
         }
     }
 }

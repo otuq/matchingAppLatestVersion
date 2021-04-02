@@ -1,0 +1,5 @@
+.DS_Store
+*.swp
+# commit対象外にするファイル、ディレクトリ
+UserInterfaceState.xcuserstate
+

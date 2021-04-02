@@ -1,0 +1,93 @@
+included:
+- matchingApp
+excluded:
+- Pods
+# 1行あたりの文字数制限を300に変更
+# プロジェクト作成時にデフォルトで追加されるコメントをひっかけないため
+line_length: 350
+# 変数名の長さのMAXとMINを変更
+identifier_name:
+    max_length:
+        warning: 40
+        error: 30
+    min_length:
+        warning: 1
+        error: 0
+opt_in_rules:
+- anyobject_protocol
+- array_init
+#- attributes //属性は関数や型では別の行にあるべきですが、変数やインポートでは同じ行にあるべきですって意味。
+- closure_end_indentation
+- closure_spacing
+- collection_alignment
+- contains_over_filter_count
+- contains_over_filter_is_empty
+- contains_over_first_not_nil
+- contains_over_range_nil_comparison
+- discouraged_none_name
+- discouraged_object_literal
+- empty_collection_literal
+- empty_count
+- empty_string
+#- empty_xctest_method 空のXCTestメソッドは避けましょうだそう
+- enum_case_associated_values_count
+- explicit_init
+- extension_access_modifier
+- fallthrough
+- fatal_error_message
+- file_header
+#- file_name
+- first_where
+- flatmap_over_map_reduce
+- identical_operands
+- joined_default_parameter
+- last_where
+- legacy_multiple
+- legacy_random
+- literal_expression_end_indentation
+- lower_acl_than_parent
+- modifier_order
+- nimble_operator
+- nslocalizedstring_key
+- number_separator
+#- object_literal //画像や色はイニシャライザよりリテラルを使って生成すべきですって意味
+- operator_usage_whitespace
+- overridden_super_call
+- override_in_extension
+- pattern_matching_keywords
+- prefer_self_in_static_references
+- prefer_self_type_over_type_of_self
+#- private_action actionキーワードが記述してあるオブジェクトはprivateを書いてってことっぽい
+#- private_outlet Outletキーワードが記述してあるオブジェクトはprivateを書いてってことっぽい
+#- prohibited_interface_builder //IBを使ってビューを生成するのは避けるべきですって意味みたい。使うので無効
+- prohibited_super_call
+- quick_discouraged_call
+- quick_discouraged_focused_test
+- quick_discouraged_pending_test
+- reduce_into
+- redundant_nil_coalescing
+- redundant_type_annotation
+- single_test_class
+- sorted_first_last
+- sorted_imports
+- static_operator
+- strong_iboutlet
+- test_case_accessibility
+- toggle_bool
+#- unavailable_function 未実装の関数は使用不可として@available(*,unavailable)入れるべきですだそう。
+- unneeded_parentheses_in_closure_argument
+- unowned_variable_capture
+- untyped_error_in_catch
+- vertical_parameter_alignment_on_call
+- vertical_whitespace_closing_braces
+- vertical_whitespace_opening_braces
+- xct_specific_matcher
+- yoda_condition
+
+disabled_rules:
+#optionalbindingは!=nilを使うべきですだそう
+- unused_optional_binding
+- force_cast
+- force_try
+- trailing_whitespace
+analyzer_rules:

@@ -6,13 +6,14 @@ target 'matchingApp' do
   use_frameworks!
   
   pod 'Eureka'
-  pod 'Firebase/Analytics'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Firestore'
-  pod 'Firebase/Storage'
   pod 'Nuke'
+  pod 'FirebaseAnalytics'
+  pod 'FirebaseAuth'
+  pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '9.3.0'
+  pod 'FirebaseStorage'
   pod 'MessageKit'
   pod 'MessageInputBar'
+  pod 'PKHUD'
   
   # Pods for matchingApp
   

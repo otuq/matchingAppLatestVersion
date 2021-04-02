@@ -2,8 +2,8 @@
 //  matchingAppUITests.swift
 //  matchingAppUITests
 //
-//  Created by USER on 2020/11/18.
-//  Copyright © 2020 otuq. All rights reserved.
+//  Created by USER on 2022/1/18.
+//  Copyright © 2022 otuq. All rights reserved.
 //
 
 import XCTest

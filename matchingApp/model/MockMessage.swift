@@ -2,16 +2,15 @@
 //  MockMessage.swift
 //  matchingApp
 //
-//  Created by USER on 2021/01/27.
-//  Copyright © 2021 otuq. All rights reserved.
+//  Created by USER on 2022/01/27.
+//  Copyright © 2022 otuq. All rights reserved.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 import MessageKit
 
 private struct MockLocationItem: LocationItem {
-
     var location: CLLocation
     var size: CGSize
 
@@ -20,9 +19,7 @@ private struct MockLocationItem: LocationItem {
         self.size = CGSize(width: 240, height: 240)
     }
 }
-
 private struct MockMediaItem: MediaItem {
-
     var url: URL?
     var image: UIImage?
     var placeholderImage: UIImage
@@ -34,9 +31,7 @@ private struct MockMediaItem: MediaItem {
         self.placeholderImage = UIImage()
     }
 }
-
 internal struct MockMessage: MessageType {
-    
     var sender: SenderType
     var messageId: String
     var sentDate: Date
@@ -48,30 +43,24 @@ internal struct MockMessage: MessageType {
         self.messageId = messageId
         self.sentDate = date
     }
-
     init(text: String, sender: SenderType, messageId: String, date: Date) {
         self.init(kind: .text(text), sender: sender, messageId: messageId, date: date)
     }
-
     init(attributedText: NSAttributedString, sender: SenderType, messageId: String, date: Date) {
         self.init(kind: .attributedText(attributedText), sender: sender, messageId: messageId, date: date)
     }
-
     init(image: UIImage, sender: SenderType, messageId: String, date: Date) {
         let mediaItem = MockMediaItem(image: image)
         self.init(kind: .photo(mediaItem), sender: sender, messageId: messageId, date: date)
     }
-
     init(thumbnail: UIImage, sender: SenderType, messageId: String, date: Date) {
         let mediaItem = MockMediaItem(image: thumbnail)
         self.init(kind: .video(mediaItem), sender: sender, messageId: messageId, date: date)
     }
-
     init(location: CLLocation, sender: SenderType, messageId: String, date: Date) {
         let locationItem = MockLocationItem(location: location)
         self.init(kind: .location(locationItem), sender: sender, messageId: messageId, date: date)
     }
-
     init(emoji: String, sender: SenderType, messageId: String, date: Date) {
         self.init(kind: .emoji(emoji), sender: sender, messageId: messageId, date: date)
     }

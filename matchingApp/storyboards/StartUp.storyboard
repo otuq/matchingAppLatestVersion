@@ -1,76 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RDU-Zj-Ceb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nkw-eU-5a0">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Start Up View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="FZn-Ls-y0u">
             <objects>
-                <viewController storyboardIdentifier="StartUpViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RDU-Zj-Ceb" customClass="StartUpViewController" customModule="matchingApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StartUpViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RDU-Zj-Ceb" customClass="SignUpViewController" customModule="matchingApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="trp-io-0vy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ユーザー登録" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDf-ck-s4M">
-                                <rect key="frame" x="20" y="64" width="110.5" height="21.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0CL-Vp-NhW">
-                                <rect key="frame" x="20" y="105.5" width="130" height="149.5"/>
+                                <rect key="frame" x="20" y="148" width="130" height="149.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="プロフィール画像" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C0n-Q1-PCx">
                                         <rect key="frame" x="0.0" y="0.0" width="130" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27B-hd-L2p">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27B-hd-L2p">
                                         <rect key="frame" x="0.0" y="19.5" width="130" height="130"/>
-                                        <color key="backgroundColor" red="0.96324401402650328" green="0.95859066130173765" blue="0.96789736675126903" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="27B-hd-L2p" secondAttribute="height" multiplier="1:1" id="AaX-6G-434"/>
                                             <constraint firstAttribute="width" constant="130" id="Mll-cv-HBX"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="タップして写真を選択">
-                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" systemColor="labelColor"/>
                                         </state>
                                     </button>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YIs-tF-VYK">
-                                <rect key="frame" x="20" y="285" width="374" height="53.5"/>
+                                <rect key="frame" x="20" y="327.5" width="374" height="53.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ユーザー名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wia-Z1-41w">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="名前を記入してください" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l2e-IY-VEm">
                                         <rect key="frame" x="0.0" y="19.5" width="374" height="34"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="p98-9w-qne">
-                                <rect key="frame" x="20" y="368.5" width="130" height="50.5"/>
+                                <rect key="frame" x="20" y="411" width="150" height="50.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="性別" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ff1-gu-dd6">
-                                        <rect key="frame" x="0.0" y="0.0" width="130" height="14.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6uH-Z2-2do">
-                                        <rect key="frame" x="0.0" y="19.5" width="130" height="32"/>
+                                        <rect key="frame" x="0.0" y="19.5" width="150" height="32"/>
                                         <segments>
                                             <segment title="未設定"/>
                                             <segment title="男性"/>
@@ -80,16 +77,17 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KxR-9l-vQT">
-                                <rect key="frame" x="20" y="439" width="150" height="53.5"/>
+                                <rect key="frame" x="20" y="481.5" width="150" height="53.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="年齢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ftz-kT-mtm">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="タップして選択してください" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dMD-Ua-LKr">
                                         <rect key="frame" x="0.0" y="19.5" width="150" height="34"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -99,16 +97,17 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BT5-H9-jJy">
-                                <rect key="frame" x="20" y="512.5" width="150" height="53.5"/>
+                                <rect key="frame" x="20" y="555" width="150" height="53.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="場所" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Pn-SS-Jgc">
                                         <rect key="frame" x="0.0" y="0.0" width="150" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="タップして選択してください" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vJN-0Y-zpB">
                                         <rect key="frame" x="0.0" y="19.5" width="150" height="34"/>
+                                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -117,39 +116,37 @@
                                     <constraint firstAttribute="width" constant="150" id="SSy-ob-vLN"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYy-ZC-lBd">
-                                <rect key="frame" x="107" y="596" width="200" height="40"/>
-                                <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYy-ZC-lBd">
+                                <rect key="frame" x="107" y="638.5" width="200" height="40"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="BAc-KY-snu"/>
                                     <constraint firstAttribute="height" constant="40" id="qys-M5-VVd"/>
                                 </constraints>
                                 <state key="normal" title="登録完了">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" systemColor="labelColor"/>
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="WYR-n1-kNR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="WYR-n1-kNR" firstAttribute="trailing" secondItem="YIs-tF-VYK" secondAttribute="trailing" constant="20" id="2cn-7S-ltE"/>
                             <constraint firstItem="KxR-9l-vQT" firstAttribute="leading" secondItem="WYR-n1-kNR" secondAttribute="leading" constant="20" id="3ya-ne-dxe"/>
                             <constraint firstItem="YIs-tF-VYK" firstAttribute="leading" secondItem="WYR-n1-kNR" secondAttribute="leading" constant="20" id="4On-WB-8jn"/>
                             <constraint firstItem="p98-9w-qne" firstAttribute="leading" secondItem="WYR-n1-kNR" secondAttribute="leading" constant="20" id="7EU-xf-0BD"/>
                             <constraint firstItem="p98-9w-qne" firstAttribute="top" secondItem="YIs-tF-VYK" secondAttribute="bottom" constant="30" id="F2u-Zl-Q7u"/>
-                            <constraint firstItem="YDf-ck-s4M" firstAttribute="leading" secondItem="WYR-n1-kNR" secondAttribute="leading" constant="20" id="H6G-6E-hsQ"/>
                             <constraint firstItem="UYy-ZC-lBd" firstAttribute="centerX" secondItem="trp-io-0vy" secondAttribute="centerX" id="RJl-bb-MdQ"/>
-                            <constraint firstItem="YDf-ck-s4M" firstAttribute="top" secondItem="WYR-n1-kNR" secondAttribute="top" constant="20" id="ZG4-gA-8ak"/>
                             <constraint firstItem="UYy-ZC-lBd" firstAttribute="top" secondItem="BT5-H9-jJy" secondAttribute="bottom" constant="30" id="aQU-y3-6cb"/>
                             <constraint firstItem="BT5-H9-jJy" firstAttribute="leading" secondItem="WYR-n1-kNR" secondAttribute="leading" constant="20" id="b3P-QZ-ufG"/>
                             <constraint firstItem="0CL-Vp-NhW" firstAttribute="leading" secondItem="WYR-n1-kNR" secondAttribute="leading" constant="20" id="dUM-hl-K3E"/>
-                            <constraint firstItem="p98-9w-qne" firstAttribute="centerX" secondItem="0CL-Vp-NhW" secondAttribute="centerX" id="dyl-kp-Guj"/>
-                            <constraint firstItem="0CL-Vp-NhW" firstAttribute="top" secondItem="YDf-ck-s4M" secondAttribute="bottom" constant="20" id="h91-Fd-DTK"/>
                             <constraint firstItem="YIs-tF-VYK" firstAttribute="top" secondItem="0CL-Vp-NhW" secondAttribute="bottom" constant="30" id="oOl-o8-gQP"/>
                             <constraint firstItem="BT5-H9-jJy" firstAttribute="top" secondItem="KxR-9l-vQT" secondAttribute="bottom" constant="20" id="tn3-RT-f8b"/>
+                            <constraint firstItem="0CL-Vp-NhW" firstAttribute="top" secondItem="WYR-n1-kNR" secondAttribute="top" constant="60" id="v8e-A4-Hl1"/>
                             <constraint firstItem="KxR-9l-vQT" firstAttribute="top" secondItem="p98-9w-qne" secondAttribute="bottom" constant="20" id="zgs-Nb-hEX"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="WYR-n1-kNR"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Lps-Wo-gTs"/>
                     <connections>
                         <outlet property="registerButton" destination="UYy-ZC-lBd" id="8cf-W4-MIK"/>
                         <outlet property="userAgeTextField" destination="dMD-Ua-LKr" id="PYW-nM-bq8"/>
@@ -161,7 +158,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EQj-KX-B5e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="928.98550724637687" y="113.83928571428571"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WaN-wU-srN">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nkw-eU-5a0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dyO-lb-hLI">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="RDU-Zj-Ceb" kind="relationship" relationship="rootViewController" id="Ks3-7w-vRh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fql-Qo-uSf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="18.840579710144929" y="113.83928571428571"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

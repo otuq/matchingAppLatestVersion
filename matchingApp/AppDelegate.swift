@@ -2,23 +2,30 @@
 //  AppDelegate.swift
 //  matchingApp
 //
-//  Created by USER on 2020/11/18.
-//  Copyright © 2020 otuq. All rights reserved.
+//  Created by USER on 2022/1/18.
+//  Copyright © 2022 otuq. All rights reserved.
 //
 
+import FirebaseCore
 import UIKit
-import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+    let dynamicColor = UIColor.dynamicColor(light: .black, dark: .white)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+
         FirebaseApp.configure()
-        
+
+        let attribute: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 15, weight: .bold),
+            .foregroundColor: dynamicColor
+        ]
+        UINavigationBar.appearance().tintColor = dynamicColor
+        UINavigationBar.appearance().titleTextAttributes = attribute
+        UITabBar.appearance().tintColor = dynamicColor
+
         return true
     }
 
@@ -35,7 +42,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }
-

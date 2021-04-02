@@ -11,11 +11,13 @@ import Nuke
 
 class ChatListTableViewCell: UITableViewCell {
     
+    //MARK: Outlets
     @IBOutlet weak var chatListImageView: UIImageView!
     @IBOutlet weak var chatListNameLabel: UILabel!
     @IBOutlet weak var chatListLatestMessageLabel: UILabel!
     @IBOutlet weak var chatListDateLabel: UILabel!
     
+    //MARK: -Property
     var chatRoom: ChatRoom?{
         didSet{
             if let urlString = URL(string: chatRoom?.anotherUser?.imageUrl ?? ""){
@@ -27,6 +29,7 @@ class ChatListTableViewCell: UITableViewCell {
         }
     }
 
+    //MARK: -Methods
     private func dateFormatter(date: Date)->String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short

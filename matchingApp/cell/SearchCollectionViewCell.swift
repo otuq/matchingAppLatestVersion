@@ -11,6 +11,7 @@ import Nuke
 
 class SearchCollectionViewCell: UICollectionViewCell {
     
+    //MARK: Outlets
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userMessageTextView: UITextView!
     @IBOutlet weak var userNameLabel: UILabel!
@@ -21,7 +22,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var topStackView: UIStackView!
     @IBOutlet weak var bottomStackView: UIStackView!
     
-    //
+    //MARK: -Property
     var anotherUser: User?{
         didSet{
             userNameLabel.text = anotherUser?.name ?? "名前"
@@ -41,19 +42,14 @@ class SearchCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    //MARK: -Methods
     override func awakeFromNib() {
         super.awakeFromNib()
         
         userImageView.layer.cornerRadius = userImageView.bounds.width/2
         userImageView.contentMode = .scaleAspectFill
         userMessageTextView.layer.cornerRadius = 10
-        //        let height = self.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize).height
-        //        arrayHeight?.append(height)
-        //        print(arrayHeight ?? 0)
-        
     }
-    
-    
     
     private func loginTimeCalculation(loginTime: Date)->String{
         let timeInterval = Date().timeIntervalSince(loginTime)

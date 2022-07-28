@@ -12,7 +12,7 @@ import Foundation
 
 protocol ChatMessageInput {
     var uid: String { get }
-    func fetchChatRoom()
+    func fetchChatRoom(complition: @escaping (_ message: MockMessage) -> Void)
     func sendMessageFirestore(text: String)
 }
 class ChatMessagePresenter {
@@ -26,12 +26,12 @@ class ChatMessagePresenter {
 }
 extension ChatMessagePresenter: ChatMessageInput {
     var uid: String { Auth.auth().currentUser?.uid ?? "" }
-    func fetchChatRoom() {
+    func fetchChatRoom(complition: @escaping (_ message: MockMessage) -> Void) {
         messageListner?.remove()
         output.messageListRemove()
         guard let chatRoomId = chatRoom?.documentId else { return }
         messageListner = Firestore.realTimeMessage(chatRoomId: chatRoomId) { message in
-            self.output.messageListAppend(message: message)
+            complition(message)
         }
     }
     func sendMessageFirestore(text: String) {

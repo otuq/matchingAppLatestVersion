@@ -10,7 +10,7 @@ import UIKit
 
 protocol SearchOutput: AnyObject {
     func transitionSignUpVC()
-    func narrowDownData()
+    func reloadData()
 }
 class SearchViewController: UIViewController {
     // MARK: properties
@@ -107,11 +107,11 @@ class SearchViewController: UIViewController {
         sender.endRefreshing()
     }
     private func fetchAnotherUsersInfo() {
-        self.anotherUsers.removeAll()
-        self.presenter.fetchAnotherUserInfo { anotherUser in
+        // データが残っていると同じユーザーが表示されてしまうのでremove,reloadしてcollectionViewのデータをリセットする。
+        anotherUsers.removeAll()
+        searchCollectionView.reloadData()
+        presenter.fetchAnotherUserInfo { anotherUser in
             self.anotherUsers.append(anotherUser)
-            self.duplicateAnotherUsers = self.anotherUsers
-            print("userSCount", self.anotherUsers.count)
         }
     }
 }
@@ -124,14 +124,16 @@ extension SearchViewController: SearchOutput {
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true, completion: nil)
     }
-    func narrowDownData() {
-        guard let formValues = self.userDefaults.object(forKey: "form")as? [String: Any] else { return }
-        let values = User(dic: formValues)
-        anotherUsers = values.gender != "未設定" ? anotherUsers.filter({ $0.gender == values.gender }): anotherUsers
-        anotherUsers = values.age != "未設定" ? anotherUsers.filter({ $0.age == values.age }): anotherUsers
-        anotherUsers = values.location != "未設定" ? anotherUsers.filter({ $0.location == values.location }): anotherUsers
+    func reloadData() {
+        // 絞り込み検索が保存されていた場合
+        if let formValues = self.userDefaults.object(forKey: "form")as? [String: Any] {
+            let values = User(dic: formValues)
+            anotherUsers = values.gender != "未設定" ? anotherUsers.filter({ $0.gender == values.gender }): anotherUsers
+            anotherUsers = values.age != "未設定" ? anotherUsers.filter({ $0.age == values.age }): anotherUsers
+            anotherUsers = values.location != "未設定" ? anotherUsers.filter({ $0.location == values.location }): anotherUsers
+        }
+        duplicateAnotherUsers = anotherUsers
         searchCollectionView.reloadData()
-        print("narrowDown")
     }
 }
 // MARK: - UICollectionViewDelegate,UICollectionViewDataSource

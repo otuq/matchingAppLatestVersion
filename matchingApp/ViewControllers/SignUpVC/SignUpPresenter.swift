@@ -10,6 +10,7 @@ import FirebaseAuth
 import FirebaseStorage
 import Foundation
 import PKHUD
+import UIKit
 
 protocol SignUpInput {
     func saveFirestore()
@@ -23,8 +24,8 @@ class SignUpPresenter {
 extension SignUpPresenter: SignUpInput {
     func saveFirestore() {
         HUD.show(.progress)
-        guard let image = output.userInfoArray[.image] as? UIImage,
-              let jpgData = image.jpegData(compressionQuality: 0.3) else { return }
+        guard let image = output.userInfoArray[.image]as? UIImage ?? UIImage(named: "tsuno"),
+        let jpgData = image.jpegData(compressionQuality: 0.3) else { return }
         let userDefault = UserDefaults.standard
         let uuidString = NSUUID().uuidString
         // Profileのアップデートで使う

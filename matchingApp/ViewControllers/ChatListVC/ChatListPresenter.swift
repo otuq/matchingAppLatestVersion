@@ -13,6 +13,7 @@ import Foundation
 protocol ChatListInput {
     func fetchUserInfo(complition: @escaping (User) -> Void)
     func fetchChatRoom()
+    func deleteChatRoom(chatRoomId: String)
 }
 class ChatListPresenter {
     private weak var output: ChatListOutput!
@@ -34,6 +35,9 @@ extension ChatListPresenter: ChatListInput {
         chatRoomListner = Firestore.chatRoomAddSnapshotListner(completion: { chatRoom in
             self.addDocumentChange(chatRoom: chatRoom)
         })
+    }
+    func deleteChatRoom(chatRoomId: String) {
+        Firestore.deleteChatRoomDocument(chatRoomId: chatRoomId)
     }
     private func addDocumentChange(chatRoom: ChatRoom) {
         guard let uid = Auth.auth().currentUser?.uid else { return }

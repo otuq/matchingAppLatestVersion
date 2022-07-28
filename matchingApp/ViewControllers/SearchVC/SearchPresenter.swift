@@ -42,7 +42,9 @@ extension SearchPresenter: SearchInput {
         }
     }
     func fetchAnotherUserInfo(complition: @escaping (User) -> Void) {
-        Firestore.getAllAnotherUserDocuments(output.narrowDownData) { anotherUser in
+        Firestore.getAllAnotherUserDocuments {
+            self.output.reloadData()
+        } complition: { anotherUser in
             complition(anotherUser)
         }
     }

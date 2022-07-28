@@ -154,6 +154,16 @@ extension Firestore {
             complition(chatRoom)
         }
     }
+    // chatRoomの削除
+    static func deleteChatRoomDocument(chatRoomId: String) {
+        Firestore.firestore().collection("chatRoom").document(chatRoomId).delete { error in
+            if let err = error {
+                print("chatRoomの削除に失敗しました。", err)
+                return
+            }
+            print("chatRoomの削除に成功しました。")
+        }
+    }
     // latestMessageを取得
     static func getLatestMessageDocument(chatRoomId: String, latestMessageId: String, complition: @escaping (Message) -> Void) {
         Firestore.firestore().collection("chatRoom").document(chatRoomId).collection("message").document(latestMessageId).getDocument { snapshot, error in

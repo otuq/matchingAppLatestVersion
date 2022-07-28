@@ -18,7 +18,6 @@ struct Sender: SenderType {
 }
 protocol ChatMessageOutput: AnyObject {
     var chatRoomPresent: ChatRoom? { get }
-    func messageListAppend(message: MockMessage)
     func messageListRemove()
 }
 class ChatMessageViewController: MessagesViewController {
@@ -31,8 +30,10 @@ class ChatMessageViewController: MessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialize()
-        presenter.fetchChatRoom()
         messageKitSetting()
+        presenter.fetchChatRoom { message in
+            self.messageListAppend(message: message)
+        }
         // メッセージを開いた時最新メッセージまでスクロール
         DispatchQueue.main.async {
             self.messagesCollectionView.scrollToLastItem()
@@ -40,7 +41,14 @@ class ChatMessageViewController: MessagesViewController {
         navigationItem.title = "チャットルーム"
     }
     private func initialize() {
+        print("init ok")
         presenter = ChatMessagePresenter(with: self)
+    }
+    private func messageListAppend(message: MockMessage) {
+        self.messageList.append(message)
+        self.messagesCollectionView.reloadData()
+        // 最新メッセージを取得するとスクロールする
+        self.messagesCollectionView.scrollToLastItem()
     }
     private func messageKitSetting() {
         messagesCollectionView.messagesDataSource = self
@@ -59,12 +67,6 @@ class ChatMessageViewController: MessagesViewController {
 // MARK: - Presenter
 extension ChatMessageViewController: ChatMessageOutput {
     var chatRoomPresent: ChatRoom? { chatRoom }
-    func messageListAppend(message: MockMessage) {
-        self.messageList.append(message)
-        self.messagesCollectionView.reloadData()
-        // 最新メッセージを取得するとスクロールする
-        self.messagesCollectionView.scrollToLastItem()
-    }
     func messageListRemove() {
         messageList.removeAll()
         messagesCollectionView.reloadData()

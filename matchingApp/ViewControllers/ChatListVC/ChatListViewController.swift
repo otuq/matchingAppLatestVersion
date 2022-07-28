@@ -114,4 +114,26 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            alertAppear {
+                guard let chatRoomId = self.chatRooms[indexPath.row].documentId else { return }
+                self.presenter.deleteChatRoom(chatRoomId: chatRoomId)
+                self.chatRooms.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
+    }
+    private func alertAppear(complition: @escaping () -> Void) {
+        let message = "本当にチャットルームを削除しますか？", titleA = "いいえ", titleB = "削除する"
+        let alertController = UIAlertController(title: .none, message: message, preferredStyle: .alert)
+        let actionA = UIAlertAction(title: titleA, style: .cancel)
+        let actionB = UIAlertAction(title: titleB, style: .default) { _ in
+            complition()
+        }
+        [actionA, actionB].forEach { action in
+            alertController.addAction(action)
+        }
+        present(alertController, animated: true)
+    }
 }
